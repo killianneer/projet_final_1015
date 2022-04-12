@@ -5,6 +5,7 @@
 #include <QtGui>
 #include <QPushButton>
 #include <QGridLayout>
+#include <QBoxLayout>
 
 int main(int argc, char *argv[])
 {
@@ -12,30 +13,47 @@ int main(int argc, char *argv[])
 
     // make a grid
     QGridLayout *gridLayout = new QGridLayout;
-    gridLayout->setHorizontalSpacing(10);
-    gridLayout->setVerticalSpacing(10);
 
     // create buttons
+    int compteur = 0;
     for (int i = 0; i < 8; ++i){
     for (int j = 0; j < 8; ++j){
-         QPushButton *piece = new QPushButton("case");
-         piece->setStyleSheet("color : white ; background-color: black");
-         gridLayout->addWidget(piece,j,i,1,1);
+         QPushButton *place = new QPushButton("");
+         if (compteur % 2 == 0){
+            place->setStyleSheet("color : black ; background-color: white");
+            }
+         else
+            place->setStyleSheet("color : white ; background-color: black");
+         gridLayout->addWidget(place,i,j,1,1);
+         gridLayout->itemAtPosition(i, j)->widget()->setMaximumHeight(100);
+         gridLayout->itemAtPosition(i,j)->widget()->setMinimumHeight(100);
+         gridLayout->itemAtPosition(i, j)->widget()->setMaximumWidth(100);
+         gridLayout->itemAtPosition(i,j)->widget()->setMinimumWidth(100);
+         gridLayout->setVerticalSpacing(0);
+         gridLayout->setHorizontalSpacing(0);
+         compteur++;
     }
+    compteur--;
     }
 
+    QWidget *carre = new QWidget;
+    carre->setLayout(gridLayout);
+    carre->setMaximumHeight(800);
+    carre->setMaximumWidth(800);
+    QBoxLayout *echequier = new QBoxLayout((QBoxLayout::LeftToRight));
+    echequier->addWidget(carre);
 
     // Create a widget
-    QWidget *w = new QWidget();
+    QWidget *window = new QWidget();
 
     // Set the grid layout as a main layout
-    w->setLayout(gridLayout);
+    window->setLayout(echequier);
 
     // Window title
-    w->setWindowTitle("Grid Layouts (8x8)");
+    window->setWindowTitle("Grid Layouts (8x8)");
 
     // Display
-    w->show();
+    window->show();
 
     return a.exec();
 }
