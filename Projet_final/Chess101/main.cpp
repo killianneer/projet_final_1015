@@ -1,12 +1,5 @@
 #include "mainwindow.h"
 
-#include <QApplication>
-#include <QtCore>
-#include <QtGui>
-#include <QPushButton>
-#include <QGridLayout>
-#include <QBoxLayout>
-
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
@@ -14,11 +7,13 @@ int main(int argc, char *argv[])
     // make a grid
     QGridLayout *gridLayout = new QGridLayout;
 
+
     // create buttons
     int compteur = 0;
     for (int i = 0; i < 8; ++i){
     for (int j = 0; j < 8; ++j){
-         QPushButton *place = new QPushButton("");
+         QString nomButton = QLatin1String(to_string(i) + to_string(j));
+         QPushButton *place = new QPushButton(to_string(i) + to_string(j));
          if (compteur % 2 == 0){
             place->setStyleSheet("color : black ; background-color: white");
             }
@@ -32,6 +27,7 @@ int main(int argc, char *argv[])
          gridLayout->setVerticalSpacing(0);
          gridLayout->setHorizontalSpacing(0);
          compteur++;
+
     }
     compteur--;
     }

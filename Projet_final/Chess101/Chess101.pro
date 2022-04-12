@@ -13,6 +13,8 @@ SOURCES += \
     mainwindow.cpp
 
 HEADERS += \
+    Case.h \
+    Piece.h \
     mainwindow.h
 
 FORMS += \

@@ -3,6 +3,14 @@
 
 #include <QMainWindow>
 #include <QPainter>
+#include <QApplication>
+#include <QtCore>
+#include <QtGui>
+#include <QPushButton>
+#include <QGridLayout>
+#include <QBoxLayout>
+#include "Piece.h"
+#include "Case.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
