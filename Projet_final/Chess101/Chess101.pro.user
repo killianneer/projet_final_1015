@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 7.0.0, 2022-04-08T03:27:44. -->
+<!-- Written by QtCreator 7.0.0, 2022-04-11T19:57:26. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -240,8 +240,9 @@
     <valuelist type="QVariantList" key="CustomOutputParsers"/>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:C:/Users/danie/Desktop/Documents/UNI/H2022/INF1015/Projet_final/Chess101/Chess101.pro</value>
-    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">C:/Users/danie/Desktop/Documents/UNI/H2022/INF1015/Projet_final/Chess101/Chess101.pro</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">Chess1012</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:C:/Users/danie/Desktop/Documents/UNI/H2022/INF1015/projet_final_1015/Projet_final/Chess101/Chess101.pro</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">C:/Users/danie/Desktop/Documents/UNI/H2022/INF1015/projet_final_1015/Projet_final/Chess101/Chess101.pro</value>
     <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
     <value type="bool" key="RunConfiguration.UseLibrarySearchPath">true</value>
