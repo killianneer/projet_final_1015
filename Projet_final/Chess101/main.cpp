@@ -12,8 +12,8 @@ int main(int argc, char *argv[])
     int compteur = 0;
     for (int i = 0; i < 8; ++i){
     for (int j = 0; j < 8; ++j){
-         QString nomButton = QLatin1String(to_string(i) + to_string(j));
-         QPushButton *place = new QPushButton(to_string(i) + to_string(j));
+         QString coordonee = QString("%1 %2").arg(i).arg(j);
+         QPushButton *place = new QPushButton(coordonee);
          if (compteur % 2 == 0){
             place->setStyleSheet("color : black ; background-color: white");
             }
@@ -28,9 +28,14 @@ int main(int argc, char *argv[])
          gridLayout->setHorizontalSpacing(0);
          compteur++;
 
+         //Case c = Case(i, j, *place)
+
+
     }
     compteur--;
     }
+
+
 
     QWidget *carre = new QWidget;
     carre->setLayout(gridLayout);
