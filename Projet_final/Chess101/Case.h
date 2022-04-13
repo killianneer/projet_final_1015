@@ -5,18 +5,22 @@
 #include <QApplication>
 #include <QPushButton>
 #include <QObject>
-
+#include "Piece.h"
 
 class Case : public QPushButton{
     Q_OBJECT
 public :
     Case(int posX, int posY, QWidget* parent = nullptr);
-    ~Case();
+    ~Case() = default;
+    void ajouterPiece(Piece piece);
+    int getPosX();
+    int getPosY();
 
 public slots:
-    void handleButton();
+    void clickEvent();
 
 private :
     int posX_, posY_;
+    Piece piece_;
 };
 #endif // CASE_H

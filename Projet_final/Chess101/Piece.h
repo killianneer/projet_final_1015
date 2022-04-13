@@ -5,19 +5,29 @@
 
 class Piece{
 public :
-    Piece(std::string nom, bool couleur, int posX, int posY){
-        nom_ = nom;
+    Piece() = default;
+    Piece(bool couleur, int posX, int posY){
         couleur_ = couleur;
         posX_ = posX;
         posY_ = posY;
     };
-    ~Piece();
+    ~Piece() = default;
 
-    //string getNomPiece();
+    std::string getNomPiece(){
+        return nom_;
+    };
 
-    void deplacerPiece();
-    void capturerPiece();
-    void mouvementsPossibles();
+    void deplacerPiece(); // A implementer
+    void capturerPiece(); // A implementer
+    void mouvementsPossibles(); // A implementer
+
+    int getPosX(){
+        return posX_;
+    }
+
+    int getPosY(){
+        return posY_;
+    }
 
 private:
     std::string nom_;
@@ -25,8 +35,51 @@ private:
     int posX_, posY_;
 };
 
+class Roi : public Piece{
+public :
+    Roi() = default;
+    Roi(bool couleur, int posX, int posY): Piece(couleur, posX, posY) {};
+private :
+    std::string nom_ = "Roi";
+};
 
+class Reine : public Piece{
+public :
+    Reine() = default;
+    Reine(bool couleur, int posX, int posY): Piece(couleur, posX, posY) {};
+private :
+    std::string nom_ = "Reine";
+};
 
+class Tour : public Piece{
+public :
+    Tour() = default;
+    Tour(bool couleur, int posX, int posY): Piece(couleur, posX, posY) {};
+private :
+    std::string nom_ = "Tour";
+};
 
+class Fou : public Piece{
+public :
+    Fou() = default;
+    Fou(bool couleur, int posX, int posY): Piece(couleur, posX, posY) {};
+private :
+    std::string nom_ = "Fou";
+};
 
+class Cheval : public Piece{
+public :
+    Cheval() = default;
+    Cheval(bool couleur, int posX, int posY): Piece(couleur, posX, posY) {};
+private :
+    std::string nom_ = "Cheval";
+};
+
+class Pion : public Piece{
+public :
+    Pion() = default;
+    Pion(bool couleur, int posX, int posY): Piece(couleur, posX, posY) {};
+private :
+    std::string nom_ = "Pion";
+};
 #endif // PIECE_H
