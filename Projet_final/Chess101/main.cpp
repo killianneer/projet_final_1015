@@ -1,4 +1,6 @@
 #include "mainwindow.h"
+#include "Piece.h"
+#include "Case.h"
 
 int main(int argc, char *argv[])
 {
@@ -28,7 +30,7 @@ int main(int argc, char *argv[])
          gridLayout->setHorizontalSpacing(0);
          compteur++;
 
-         //Case c = Case(i, j, *place)
+         Case c = Case(i, j, place);
 
 
     }

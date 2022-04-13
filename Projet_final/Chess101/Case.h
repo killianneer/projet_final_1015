@@ -4,20 +4,23 @@
 #include <iostream>
 #include <QApplication>
 #include <QPushButton>
+#include <QObject>
 
 using namespace std;
 
-class Case{
+class Case : public QObject{
     Q_OBJECT
 public :
-    Case(int posX, int posY, QPushButton boutton){
+    Case(int posX, int posY, QPushButton* boutton){
         posX_ = posX;
         posY_ = posY;
-        placeBoutton_ = &boutton;
+        placeBoutton_ = boutton;
 
-        QAbstractButton::connect(placeBoutton_, &QPushButton::released, this, &Case::handleButton);
+        QObject::connect(placeBoutton_, SIGNAL(clicked()), this, SLOT(handleButton()));
     };
+
     ~Case();
+
 private slots:
     void handleButton() {
         // change the text
