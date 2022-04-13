@@ -3,11 +3,9 @@
 
 #include <iostream>
 
-using namespace std;
-
 class Piece{
 public :
-    Piece(string nom, bool couleur, int posX, int posY){
+    Piece(std::string nom, bool couleur, int posX, int posY){
         nom_ = nom;
         couleur_ = couleur;
         posX_ = posX;
@@ -22,7 +20,7 @@ public :
     void mouvementsPossibles();
 
 private:
-    string nom_;
+    std::string nom_;
     bool couleur_;
     int posX_, posY_;
 };

@@ -1,6 +1,5 @@
 #include "mainwindow.h"
-#include "Piece.h"
-#include "Case.h"
+#include "Case.cpp"
 
 int main(int argc, char *argv[])
 {
@@ -16,22 +15,22 @@ int main(int argc, char *argv[])
     for (int j = 0; j < 8; ++j){
          QString coordonee = QString("%1 %2").arg(i).arg(j);
          QPushButton *place = new QPushButton(coordonee);
-         if (compteur % 2 == 0){
-            place->setStyleSheet("color : black ; background-color: white");
-            }
-         else
-            place->setStyleSheet("color : white ; background-color: black");
+//         if (compteur % 2 == 0){
+//            place->setStyleSheet("color : black ; background-color: white");
+//            }
+//         else
+//            place->setStyleSheet("color : white ; background-color: black");
+//         gridLayout->addWidget(place,i,j,1,1);
+//         gridLayout->itemAtPosition(i, j)->widget()->setMaximumHeight(100);
+//         gridLayout->itemAtPosition(i,j)->widget()->setMinimumHeight(100);
+//         gridLayout->itemAtPosition(i, j)->widget()->setMaximumWidth(100);
+//         gridLayout->itemAtPosition(i,j)->widget()->setMinimumWidth(100);
+//         gridLayout->setVerticalSpacing(0);
+//         gridLayout->setHorizontalSpacing(0);
+         //compteur++;
+
+         Case c = Case(i, j);
          gridLayout->addWidget(place,i,j,1,1);
-         gridLayout->itemAtPosition(i, j)->widget()->setMaximumHeight(100);
-         gridLayout->itemAtPosition(i,j)->widget()->setMinimumHeight(100);
-         gridLayout->itemAtPosition(i, j)->widget()->setMaximumWidth(100);
-         gridLayout->itemAtPosition(i,j)->widget()->setMinimumWidth(100);
-         gridLayout->setVerticalSpacing(0);
-         gridLayout->setHorizontalSpacing(0);
-         compteur++;
-
-         Case c = Case(i, j, place);
-
 
     }
     compteur--;

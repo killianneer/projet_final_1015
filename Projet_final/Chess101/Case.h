@@ -6,28 +6,17 @@
 #include <QPushButton>
 #include <QObject>
 
-using namespace std;
 
-class Case : public QObject{
+class Case : public QPushButton{
     Q_OBJECT
 public :
-    Case(int posX, int posY, QPushButton* boutton){
-        posX_ = posX;
-        posY_ = posY;
-        placeBoutton_ = boutton;
-
-        QObject::connect(placeBoutton_, SIGNAL(clicked()), this, SLOT(handleButton()));
-    };
-
+    Case(int posX, int posY, QWidget* parent = nullptr);
     ~Case();
 
-private slots:
-    void handleButton() {
-        // change the text
-          placeBoutton_->setText("test");
-    };
+public slots:
+    void handleButton();
+
 private :
     int posX_, posY_;
-    QPushButton *placeBoutton_;
 };
 #endif // CASE_H
