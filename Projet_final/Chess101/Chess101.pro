@@ -10,6 +10,7 @@ CONFIG += c++17
 
 SOURCES += \
     Case.cpp \
+    Piece.cpp \
     main.cpp \
     mainwindow.cpp
 

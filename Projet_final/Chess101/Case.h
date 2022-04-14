@@ -1,10 +1,10 @@
 #ifndef CASE_H
 #define CASE_H
 
-#include <iostream>
 #include <QApplication>
 #include <QPushButton>
 #include <QObject>
+#include <QFont>
 #include "Piece.h"
 
 class Case : public QPushButton{

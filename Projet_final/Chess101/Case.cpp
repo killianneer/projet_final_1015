@@ -1,8 +1,3 @@
-#include <iostream>
-#include <QApplication>
-#include <QPushButton>
-#include <QObject>
-#include <QString>
 #include "Case.h"
 
 using namespace std;
@@ -14,6 +9,9 @@ Case::Case(int posX, int posY, QWidget* parent): QPushButton(parent){
     this->setMinimumHeight(100);
     this->setMaximumWidth(100);
     this->setMinimumWidth(100);
+    QFont font = this->font();
+    font.setPointSize(40);
+    this->setFont(font);
     connect(this, SIGNAL(clicked()), this, SLOT(clickEvent()));
 };
 
@@ -28,14 +26,12 @@ int Case::getPosY(){
 void Case::clickEvent() {
     // change the text
     this->setText("Test");
+    //this->setStyleSheet("color : white ; background-color: red");
 };
 
 void Case::ajouterPiece(Piece piece){
     piece_ = piece;
-    // A implementer
-    //QString nomPiece = QString::fromStdString(piece.getNomPiece());
-    //this->setText(nomPiece);
-    this->setText("Roi");
+    this->setText(piece.getNomPiece());
 }
 
 

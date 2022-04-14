@@ -6,7 +6,6 @@
 #include <QApplication>
 #include <QtCore>
 #include <QtGui>
-#include <QPushButton>
 #include <QGridLayout>
 #include <QBoxLayout>
 #include "Piece.h"
