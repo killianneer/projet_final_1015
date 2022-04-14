@@ -9,16 +9,9 @@ int main(int argc, char *argv[])
     // make a grid
     QGridLayout *gridLayout = new QGridLayout;
 
-    //Faire des pieces
-    Roi roiBlanc = Roi(false, 0, 3);
-    Roi roiNoir = Roi(true, 7, 3);
-    Reine reineNoir = Reine(true, 7, 4);
-    vector <Piece> piecesAPlacer;
-    piecesAPlacer.push_back(roiBlanc);
-    piecesAPlacer.push_back(roiNoir);
-    piecesAPlacer.push_back(reineNoir);
-
     // Va dans classe Echequier --> pas clean
+    Piece pieces = Piece();
+    vector <Piece> piecesAPlacer = pieces.piecesCreer();
     int compteur = 0;
     for (int i = 0; i < 8; ++i){
     for (int j = 0; j < 8; ++j){

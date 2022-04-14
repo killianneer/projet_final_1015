@@ -2,6 +2,9 @@
 
 using namespace std;
 
+Piece pieces = Piece();
+vector <Piece> piecesAPlacer = pieces.piecesCreer();
+
 Case::Case(int posX, int posY, QWidget* parent): QPushButton(parent){
     posX_ = posX;
     posY_ = posY;
@@ -25,6 +28,10 @@ int Case::getPosY(){
 
 void Case::clickEvent() {
     // change the text
+    for (Piece p : piecesAPlacer){
+        if (this->text() == p.getNomPiece())
+            this->setText("wow");
+    }
     this->setText("Test");
     //this->setStyleSheet("color : white ; background-color: red");
 };
