@@ -11,10 +11,13 @@ public :
 Echequier();
 
 std::vector <Piece*> getPiecesAPlacer();
-void piecesCreer(std::vector <Piece*> piecesAPlacer_);
-QBoxLayout* creerEchequier(Echequier echequier, QBoxLayout* boite);
+QBoxLayout* getBoite();
+
+void piecesCreer();
+void creerEchequier();
 
 private :
 std::vector <Piece*> piecesAPlacer_;
+QBoxLayout* boite_;
 };
 #endif // ECHEQUIER_H
