@@ -14,8 +14,6 @@ public :
     QString getNomPiece();
     void setNomPiece(QString nom);
 
-    std::vector <Piece> piecesCreer();
-
     void deplacerPiece(); // A implementer
     void capturerPiece(); // A implementer
     void mouvementsPossibles(); // A implementer

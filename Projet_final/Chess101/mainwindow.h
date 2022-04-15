@@ -6,10 +6,8 @@
 #include <QApplication>
 #include <QtCore>
 #include <QtGui>
-#include <QGridLayout>
 #include <QBoxLayout>
-#include "Piece.h"
-#include "Case.h"
+#include "Echequier.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }

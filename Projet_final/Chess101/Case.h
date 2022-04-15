@@ -12,7 +12,7 @@ class Case : public QPushButton{
 public :
     Case(int posX, int posY, QWidget* parent = nullptr);
     ~Case() = default;
-    void ajouterPiece(Piece piece);
+    void ajouterPiece(Piece* piece);
     int getPosX();
     int getPosY();
 
@@ -21,6 +21,6 @@ public slots:
 
 private :
     int posX_, posY_;
-    Piece piece_;
+    Piece* piece_ = nullptr;
 };
 #endif // CASE_H

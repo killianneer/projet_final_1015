@@ -10,12 +10,14 @@ CONFIG += c++17
 
 SOURCES += \
     Case.cpp \
+    Echequier.cpp \
     Piece.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
     Case.h \
+    Echequier.h \
     Piece.h \
     mainwindow.h
 

@@ -17,19 +17,6 @@ int Piece::getPosX(){return posX_;};
 int Piece::getPosY(){return posY_;};
 
 
-//Faire des pieces
-
-vector <Piece> Piece::piecesCreer(){
-    Roi roiBlanc = Roi(false, 0, 3);
-    Roi roiNoir = Roi(true, 7, 3);
-    Reine reineNoir = Reine(true, 7, 4);
-    vector <Piece> piecesAPlacer;
-    piecesAPlacer.push_back(roiBlanc);
-    piecesAPlacer.push_back(roiNoir);
-    piecesAPlacer.push_back(reineNoir);
-    return piecesAPlacer;
-};
-
 //Roi
 
 
