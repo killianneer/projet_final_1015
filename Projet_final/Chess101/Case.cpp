@@ -19,6 +19,14 @@ int Case::getPosX(){return posX_;};
 
 int Case::getPosY(){return posY_;};
 
+QString Case::getCouleurBase() {
+    return couleurBase_;
+};
+
+void Case::setCouleurBase(QString couleurBase) {
+    couleurBase_ = couleurBase;
+};
+
 void Case::clickEvent() {
     // change the text
     if (piece_ != nullptr)

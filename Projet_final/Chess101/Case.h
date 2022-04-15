@@ -15,6 +15,8 @@ public :
     void ajouterPiece(Piece* piece);
     int getPosX();
     int getPosY();
+    QString getCouleurBase();
+    void setCouleurBase(QString couleurBase);
 
 public slots:
     void clickEvent();
@@ -22,5 +24,6 @@ public slots:
 private :
     int posX_, posY_;
     Piece* piece_ = nullptr;
+    QString couleurBase_ ;
 };
 #endif // CASE_H

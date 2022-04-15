@@ -25,24 +25,26 @@ void Echequier::creerEchequier(){
     //placer les cases
     int compteur = 0;
     for (int i = 0; i < 8; ++i){
-    for (int j = 0; j < 8; ++j){
-         Case* caseEchequier = new Case(i, j);
-         if (compteur % 2 == 0){
-            caseEchequier->setStyleSheet("color : black ; background-color: white");
-            }
-         else
-            caseEchequier->setStyleSheet("color : white ; background-color: black");
-         addWidget(caseEchequier,i,j,1,1);
-         setVerticalSpacing(0);
-         setHorizontalSpacing(0);
-         compteur++;
-         //placer piece
-         for (Piece* p : piecesAPlacer_){
-             if (p->getPosX() == i && p->getPosY() == j)
-                caseEchequier->ajouterPiece(p);
-         }
+        for (int j = 0; j < 8; ++j){
+             Case* caseEchequier = new Case(i, j);
 
-    }
+             if (compteur % 2 == 0)
+                caseEchequier->setCouleurBase("color : black ; background-color: white");
+             else
+                caseEchequier->setCouleurBase("color : white ; background-color: black");
+
+             caseEchequier->setStyleSheet(caseEchequier->getCouleurBase());
+
+             addWidget(caseEchequier,i,j,1,1);
+             setVerticalSpacing(0);
+             setHorizontalSpacing(0);
+             compteur++;
+             //placer piece
+             for (Piece* p : piecesAPlacer_){
+                 if (p->getPosX() == i && p->getPosY() == j)
+                    caseEchequier->ajouterPiece(p);
+             }
+        }
     compteur--;
     }
 
