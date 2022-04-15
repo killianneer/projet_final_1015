@@ -15,13 +15,9 @@ Case::Case(int posX, int posY, QWidget* parent): QPushButton(parent){
     connect(this, SIGNAL(clicked()), this, SLOT(clickEvent()));
 };
 
-int Case::getPosX(){
-    return posX_;
-}
+int Case::getPosX(){return posX_;};
 
-int Case::getPosY(){
-    return posY_;
-}
+int Case::getPosY(){return posY_;};
 
 void Case::clickEvent() {
     // change the text

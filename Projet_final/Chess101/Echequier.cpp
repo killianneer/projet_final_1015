@@ -5,13 +5,9 @@ using namespace std;
 Echequier::Echequier(){
 };
 
-vector <Piece*> Echequier::getPiecesAPlacer(){
-    return piecesAPlacer_;
-};
+vector <Piece*> Echequier::getPiecesAPlacer(){return piecesAPlacer_;};
 
-QBoxLayout* Echequier::getBoite(){
-    return boite_;
-};
+QBoxLayout* Echequier::getBoite(){return boite_;};
 
 void Echequier::piecesCreer(){
     Roi* roiBlanc = new Roi(false, 0, 3);
@@ -26,6 +22,7 @@ void Echequier::creerEchequier(){
     //faire les pieces
     piecesCreer();
 
+    //placer les cases
     int compteur = 0;
     for (int i = 0; i < 8; ++i){
     for (int j = 0; j < 8; ++j){
@@ -49,7 +46,7 @@ void Echequier::creerEchequier(){
     compteur--;
     }
 
-    // A changer
+    // Caracteristiques du board
     QWidget *carre = new QWidget;
     carre->setLayout(this);
     carre->setMaximumHeight(800);
