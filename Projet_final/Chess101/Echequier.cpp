@@ -1,21 +1,25 @@
 #include "Echequier.h"
+#include "EtatJeu.h"
 //Faire des pieces
 using namespace std;
 
-Echequier::Echequier(){
+Echequier::Echequier(EtatJeu* etatJeu){
+    etatJeu_ = etatJeu;
+    etatJeu_->setEchequier(this);
 };
 
-vector <Piece*> Echequier::getPiecesAPlacer(){return piecesAPlacer_;};
+vector <Piece*> Echequier::getPieces(){return pieces_;};
 
 QBoxLayout* Echequier::getBoite(){return boite_;};
 
 void Echequier::piecesCreer(){
+    // A faire en unique_ptr()
     Roi* roiBlanc = new Roi(false, 0, 3);
     Roi* roiNoir = new Roi(true, 7, 3);
     Reine* reineNoir = new Reine(true, 7, 4);
-    piecesAPlacer_.push_back(roiBlanc);
-    piecesAPlacer_.push_back(roiNoir);
-    piecesAPlacer_.push_back(reineNoir);
+    pieces_.push_back(roiBlanc);
+    pieces_.push_back(roiNoir);
+    pieces_.push_back(reineNoir);
 };
 
 void Echequier::creerEchequier(){
@@ -26,8 +30,8 @@ void Echequier::creerEchequier(){
     int compteur = 0;
     for (int i = 0; i < 8; ++i){
         for (int j = 0; j < 8; ++j){
-             Case* caseEchequier = new Case(i, j);
-
+             Case* caseEchequier = new Case(i, j, etatJeu_);
+             cases_.push_back(caseEchequier);
              if (compteur % 2 == 0)
                 caseEchequier->setCouleurBase("color : black ; background-color: white");
              else
@@ -36,11 +40,9 @@ void Echequier::creerEchequier(){
              caseEchequier->setStyleSheet(caseEchequier->getCouleurBase());
 
              addWidget(caseEchequier,i,j,1,1);
-             setVerticalSpacing(0);
-             setHorizontalSpacing(0);
              compteur++;
              //placer piece
-             for (Piece* p : piecesAPlacer_){
+             for (Piece* p : pieces_){
                  if (p->getPosX() == i && p->getPosY() == j)
                     caseEchequier->ajouterPiece(p);
              }

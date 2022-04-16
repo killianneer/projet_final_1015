@@ -1,22 +1,28 @@
 #ifndef CASE_H
 #define CASE_H
 
-#include <QApplication>
 #include <QPushButton>
 #include <QObject>
 #include <QFont>
 #include "Piece.h"
 
+class EtatJeu;
 class Case : public QPushButton{
     Q_OBJECT
 public :
-    Case(int posX, int posY, QWidget* parent = nullptr);
+    Case(int posX, int posY, EtatJeu* etatJeu, QWidget* parent = nullptr);
     ~Case() = default;
+    void init();
+
     void ajouterPiece(Piece* piece);
+    void enleverPiece();
+
     int getPosX();
     int getPosY();
+    Piece* getPiece();
     QString getCouleurBase();
     void setCouleurBase(QString couleurBase);
+    void setEtatJeu(EtatJeu* etatJeu);
 
 public slots:
     void clickEvent();
@@ -25,5 +31,6 @@ private :
     int posX_, posY_;
     Piece* piece_ = nullptr;
     QString couleurBase_ ;
+    EtatJeu* etatJeu_;
 };
 #endif // CASE_H

@@ -11,6 +11,7 @@ CONFIG += c++17
 SOURCES += \
     Case.cpp \
     Echequier.cpp \
+    EtatJeu.cpp \
     Piece.cpp \
     main.cpp \
     mainwindow.cpp
@@ -18,6 +19,7 @@ SOURCES += \
 HEADERS += \
     Case.h \
     Echequier.h \
+    EtatJeu.h \
     Piece.h \
     mainwindow.h
 

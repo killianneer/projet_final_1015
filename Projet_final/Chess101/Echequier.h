@@ -2,22 +2,23 @@
 #define ECHEQUIER_H
 
 #include <QGridLayout>
-#include "Piece.h"
 #include "Case.h"
 
-
+class EtatJeu;
 class Echequier : public QGridLayout{
 public :
-Echequier();
+Echequier(EtatJeu* etatJeu);
 
-std::vector <Piece*> getPiecesAPlacer();
+std::vector <Piece*> getPieces();
 QBoxLayout* getBoite();
 
 void piecesCreer();
 void creerEchequier();
 
 private :
-std::vector <Piece*> piecesAPlacer_;
+std::vector <Piece*> pieces_;
+std::vector <Case*> cases_;
 QBoxLayout* boite_;
+EtatJeu* etatJeu_;
 };
 #endif // ECHEQUIER_H

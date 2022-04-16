@@ -5,6 +5,7 @@
 #include <QString>
 #include <vector>
 
+class Case;
 class Piece{
 public :
     Piece() = default;
@@ -14,7 +15,7 @@ public :
     QString getNomPiece();
     void setNomPiece(QString nom);
 
-    void deplacerPiece(); // A implementer
+    void deplacerPiece(Case* caseADeplacer); // A implementer
     void capturerPiece(); // A implementer
     void mouvementsPossibles(); // A implementer
 
@@ -31,7 +32,6 @@ class Roi : public Piece{
 public :
     Roi() = default;
     Roi(bool couleur, int posX, int posY): Piece(couleur, posX, posY) {this->setNomPiece("♚");};
-
 private :
 };
 

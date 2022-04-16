@@ -7,7 +7,7 @@
 #include <QtCore>
 #include <QtGui>
 #include <QBoxLayout>
-#include "Echequier.h"
+#include "EtatJeu.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }

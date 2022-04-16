@@ -1,10 +1,17 @@
 #include "Case.h"
+#include "EtatJeu.h"
 
 using namespace std;
 
-Case::Case(int posX, int posY, QWidget* parent): QPushButton(parent){
+Case::Case(int posX, int posY, EtatJeu* etatJeu, QWidget* parent): QPushButton(parent){
     posX_ = posX;
     posY_ = posY;
+    etatJeu_ = etatJeu;
+    init();
+};
+
+void Case::init(){
+    // faire attention au variable imaginaire
     this->setMaximumHeight(100);
     this->setMinimumHeight(100);
     this->setMaximumWidth(100);
@@ -13,31 +20,29 @@ Case::Case(int posX, int posY, QWidget* parent): QPushButton(parent){
     font.setPointSize(40);
     this->setFont(font);
     connect(this, SIGNAL(clicked()), this, SLOT(clickEvent()));
-};
+}
 
 int Case::getPosX(){return posX_;};
 
 int Case::getPosY(){return posY_;};
 
-QString Case::getCouleurBase() {
-    return couleurBase_;
-};
+Piece* Case::getPiece(){return piece_;};
 
-void Case::setCouleurBase(QString couleurBase) {
-    couleurBase_ = couleurBase;
-};
+QString Case::getCouleurBase() {return couleurBase_;};
 
-void Case::clickEvent() {
-    // change the text
-    if (piece_ != nullptr)
-        this->setStyleSheet("background-color: red");
-    else
-        this->setText("Test");
-};
+void Case::setCouleurBase(QString couleurBase) {couleurBase_ = couleurBase;};
+
+void Case::setEtatJeu(EtatJeu* etatJeu){etatJeu_ = etatJeu;};
+
+void Case::clickEvent() {etatJeu_->caseClicker(this);};
 
 void Case::ajouterPiece(Piece* piece){
     piece_ = piece;
     this->setText(piece->getNomPiece());
 }
 
+void Case::enleverPiece(){
+    piece_ = nullptr;
+    this->setText("");
+}
 

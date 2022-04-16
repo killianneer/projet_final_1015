@@ -1,4 +1,5 @@
 #include "Piece.h"
+#include "Case.h"
 
 
 using namespace std;
@@ -16,6 +17,11 @@ void Piece::setNomPiece(QString nom) {nom_ = nom;};
 int Piece::getPosX(){return posX_;};
 int Piece::getPosY(){return posY_;};
 
+void Piece::deplacerPiece(Case* caseADeplacer){
+    posX_ = caseADeplacer->getPosX();
+    posY_ = caseADeplacer->getPosY();
+    caseADeplacer->ajouterPiece(this);
+};
 
 //Roi
 

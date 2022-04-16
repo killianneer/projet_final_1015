@@ -7,7 +7,8 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
 
     // Va dans classe Echequier --> pas clean
-    Echequier echequier = Echequier();
+    EtatJeu* etatJeu = new EtatJeu;
+    Echequier echequier = Echequier(etatJeu);
     echequier.creerEchequier();
 
     // Create a widget
