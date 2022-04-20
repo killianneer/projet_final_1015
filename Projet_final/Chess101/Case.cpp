@@ -12,13 +12,11 @@ Case::Case(int posX, int posY, EtatJeu* etatJeu, QWidget* parent): QPushButton(p
 
 void Case::init(){
     // faire attention au variable imaginaire
-    this->setMaximumHeight(100);
-    this->setMinimumHeight(100);
-    this->setMaximumWidth(100);
-    this->setMinimumWidth(100);
-    QFont font = this->font();
-    font.setPointSize(40);
-    this->setFont(font);
+    setMaximumHeight(100);
+    setMinimumHeight(100);
+    setMaximumWidth(100);
+    setMinimumWidth(100);
+    setIconSize(QSize(100, 100));
     connect(this, SIGNAL(clicked()), this, SLOT(clickEvent()));
 }
 
@@ -42,11 +40,11 @@ void Case::clickEvent() {etatJeu_->caseClicker(this);};
 
 void Case::ajouterPiece(Piece* piece){
     piece_ = piece;
-    this->setText(piece->getNomPiece());
+    setIcon(QIcon(piece->getImagePath()));
 }
 
 void Case::enleverPiece(){
     piece_ = nullptr;
-    this->setText("");
+    setIcon(QIcon());
 }
 

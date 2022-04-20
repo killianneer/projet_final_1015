@@ -4,6 +4,7 @@
 #include <iostream>
 #include <QString>
 #include <vector>
+#include <QIcon>
 
 class Case;
 class Piece{
@@ -24,16 +25,20 @@ public :
     int getPosX();
     int getPosY();
 
+    QString getImagePath();
+    void setImagePath(QString imagePath);
+
 private:
     QString nom_ ;
     bool couleur_;
     int posX_, posY_;
+    QString imagePath_;
 };
 
 class Roi : public Piece{
 public :
     Roi() = default;
-    Roi(bool couleur, int posX, int posY): Piece(couleur, posX, posY) {this->setNomPiece("♚");};
+    Roi(bool couleur, int posX, int posY);
     bool critereMouvement(Case* caseEchequier);
 private :
 };
@@ -41,7 +46,7 @@ private :
 class Reine : public Piece{
 public :
     Reine() = default;
-    Reine(bool couleur, int posX, int posY): Piece(couleur, posX, posY) {this->setNomPiece("♕");};
+    Reine(bool couleur, int posX, int posY);
     bool critereMouvement(Case* caseEchequier);
 private :
 };

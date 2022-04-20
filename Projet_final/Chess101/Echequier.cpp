@@ -34,11 +34,11 @@ void Echequier::creerEchequier(){
              Case* caseEchequier = new Case(i, j, etatJeu_);
              cases_.push_back(caseEchequier);
              if (compteur % 2 == 0) {
-                 caseEchequier->setCouleurBase("color : white ; background-color: black");
+                 caseEchequier->setCouleurBase("background-color: rgba(165, 42, 42, 0.8)");
                  caseEchequier->setNomCouleurBase("noir");
              }
              else {
-                 caseEchequier->setCouleurBase("color : black ; background-color: white");
+                 caseEchequier->setCouleurBase("background-color: rgba(200, 50, 50, 0.1)");
                  caseEchequier->setNomCouleurBase("blanc");
              }
 
@@ -51,6 +51,7 @@ void Echequier::creerEchequier(){
              for (Piece* p : pieces_){
                  if (p->getPosX() == i && p->getPosY() == j)
                     caseEchequier->ajouterPiece(p);
+
              }
         }
     compteur--;

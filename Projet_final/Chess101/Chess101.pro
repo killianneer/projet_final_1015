@@ -30,3 +30,18 @@ FORMS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+DISTFILES += \
+    pieces_png/Chess_bdt45.png \
+    pieces_png/Chess_blt45.png \
+    pieces_png/Chess_ndt45.png \
+    pieces_png/Chess_nlt45.png \
+    pieces_png/Chess_pdt45.png \
+    pieces_png/Chess_plt45.png \
+    pieces_png/Chess_qdt45.png \
+    pieces_png/Chess_qlt45.png \
+    pieces_png/Chess_rdt45.png \
+    pieces_png/Chess_rlt45.png
+
+RESOURCES += \
+    piecesRessources.qrc

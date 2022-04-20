@@ -1,0 +1,17 @@
+<RCC>
+    <qresource prefix="/pieces">
+        <file>pieces_png/roiNoir.png</file>
+        <file>pieces_png/chevalBlanc.png</file>
+        <file>pieces_png/chevalNoir.png</file>
+        <file>pieces_png/fouBlanc.png</file>
+        <file>pieces_png/fouNoir.png</file>
+        <file>pieces_png/pionBlanc.png</file>
+        <file>pieces_png/pionNoir.png</file>
+        <file>pieces_png/reineBlanc.png</file>
+        <file>pieces_png/reineNoir.png</file>
+        <file>pieces_png/roiBlanc.png</file>
+        <file>pieces_png/tourBlanc.png</file>
+        <file>pieces_png/tourNoir.png</file>
+    </qresource>
+    <qresource prefix="/new/prefix2"/>
+</RCC>

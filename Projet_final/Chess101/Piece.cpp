@@ -17,6 +17,9 @@ void Piece::setNomPiece(QString nom) {nom_ = nom;};
 int Piece::getPosX(){return posX_;};
 int Piece::getPosY(){return posY_;};
 
+QString Piece::getImagePath(){return imagePath_;};
+void Piece::setImagePath(QString imagePath){imagePath_ = imagePath;};
+
 void Piece::deplacerPiece(Case* caseADeplacer){
     posX_ = caseADeplacer->getPosX();
     posY_ = caseADeplacer->getPosY();
@@ -44,6 +47,17 @@ bool Piece::estCaseDePiece(Case* caseEchequier){
 
 
 //Roi
+Roi::Roi(bool couleur, int posX, int posY): Piece(couleur, posX, posY) {
+    if (couleur){
+        this->setNomPiece("Roi Noir");
+        this->setImagePath(":/pieces/pieces_png/roiNoir.png");
+    }
+    else{
+        this->setNomPiece("Roi Blanc");
+        this->setImagePath(":/pieces/pieces_png/roiBlanc.png");
+    }
+};
+
 bool Roi::critereMouvement(Case* caseEchequier) {
     if (estCaseDePiece(caseEchequier))
         return false;
@@ -58,6 +72,17 @@ bool Roi::critereMouvement(Case* caseEchequier) {
 
 
 //Reine
+Reine::Reine(bool couleur, int posX, int posY): Piece(couleur, posX, posY) {
+    if (couleur){
+        this->setNomPiece("Reine Noir");
+        this->setImagePath(":/pieces/pieces_png/reineNoir.png");
+    }
+    else{
+        this->setNomPiece("Reine Blanc");
+        this->setImagePath(":/pieces/pieces_png/reineBlanc.png");
+    }
+};
+
 bool Reine::critereMouvement(Case* caseEchequier) {
     if (estCaseDePiece(caseEchequier))
         return false;

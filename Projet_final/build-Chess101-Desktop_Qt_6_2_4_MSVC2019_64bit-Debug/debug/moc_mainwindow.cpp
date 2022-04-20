@@ -7,7 +7,9 @@
 *****************************************************************************/
 
 #include <memory>
-#include "../../../projet_final_1015/Projet_final/Chess101/mainwindow.h"
+#include "../../Chess101/mainwindow.h"
+#include <QtGui/qtextcursor.h>
+#include <QScreen>
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
