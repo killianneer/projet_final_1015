@@ -17,7 +17,8 @@ public :
 
     void deplacerPiece(Case* caseADeplacer); // A implementer
     void capturerPiece(); // A implementer
-    void mouvementsPossibles(); // A implementer
+    std::vector<Case*> mouvementsPossibles(std::vector<Case*> cases);
+    virtual bool critereMouvement(Case* caseEchequier);
 
     int getPosX();
     int getPosY();
@@ -32,6 +33,7 @@ class Roi : public Piece{
 public :
     Roi() = default;
     Roi(bool couleur, int posX, int posY): Piece(couleur, posX, posY) {this->setNomPiece("♚");};
+    bool critereMouvement(Case* caseEchequier);
 private :
 };
 
@@ -39,6 +41,7 @@ class Reine : public Piece{
 public :
     Reine() = default;
     Reine(bool couleur, int posX, int posY): Piece(couleur, posX, posY) {this->setNomPiece("♕");};
+    bool critereMouvement(Case* caseEchequier);
 private :
 };
 

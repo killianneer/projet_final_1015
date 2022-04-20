@@ -9,6 +9,7 @@ Echequier::Echequier(EtatJeu* etatJeu){
 };
 
 vector <Piece*> Echequier::getPieces(){return pieces_;};
+vector <Case*> Echequier::getCases(){return cases_;};
 
 QBoxLayout* Echequier::getBoite(){return boite_;};
 

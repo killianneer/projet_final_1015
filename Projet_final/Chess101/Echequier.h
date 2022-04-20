@@ -10,6 +10,7 @@ public :
 Echequier(EtatJeu* etatJeu);
 
 std::vector <Piece*> getPieces();
+std::vector <Case*> getCases();
 QBoxLayout* getBoite();
 
 void piecesCreer();

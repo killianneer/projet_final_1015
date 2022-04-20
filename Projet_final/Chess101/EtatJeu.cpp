@@ -16,12 +16,24 @@ void EtatJeu::caseClicker(Case* caseClicker){
         caseClicker->setStyleSheet("background-color: blue");
         caseAppuye_ = caseClicker;
         pieceAppuye_ = caseClicker->getPiece();
+        casesPossibles_ = pieceAppuye_->mouvementsPossibles(echequier_->getCases());
+        casesVertes(casesPossibles_);
     }
     else if (pieceAppuye_ != nullptr){
+        for (Case* caseEchequier : casesPossibles_) {
+            caseEchequier->setStyleSheet(caseEchequier->getCouleurBase());
+            if (caseClicker == caseEchequier) {
+                caseAppuye_->enleverPiece();
+                pieceAppuye_->deplacerPiece(caseClicker);
+            }
+        }
         caseAppuye_->setStyleSheet(caseAppuye_->getCouleurBase());
-        caseAppuye_->enleverPiece();
-        pieceAppuye_->deplacerPiece(caseClicker);
         caseAppuye_ = nullptr;
         pieceAppuye_ = nullptr;
     }
 };
+
+void EtatJeu::casesVertes(vector<Case*> cases) {
+    for (Case* caseEchequier : cases)
+        caseEchequier->setStyleSheet("background-color: green");
+}
