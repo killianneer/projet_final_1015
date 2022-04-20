@@ -19,9 +19,11 @@ public :
 
     int getPosX();
     int getPosY();
+    std::string getNomCouleurBase();
     Piece* getPiece();
     QString getCouleurBase();
     void setCouleurBase(QString couleurBase);
+    void setNomCouleurBase(std::string nomCouleurBase);
     void setEtatJeu(EtatJeu* etatJeu);
 
 public slots:
@@ -31,6 +33,7 @@ private :
     int posX_, posY_;
     Piece* piece_ = nullptr;
     QString couleurBase_ ;
+    std::string nomCouleurBase_;
     EtatJeu* etatJeu_;
 };
 #endif // CASE_H

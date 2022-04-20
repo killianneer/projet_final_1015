@@ -19,6 +19,7 @@ public :
     void capturerPiece(); // A implementer
     std::vector<Case*> mouvementsPossibles(std::vector<Case*> cases);
     virtual bool critereMouvement(Case* caseEchequier);
+    bool estCaseDePiece(Case* caseEchequier);
 
     int getPosX();
     int getPosY();

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 7.0.0, 2022-04-15T17:10:15. -->
+<!-- Written by QtCreator 7.0.0, 2022-04-19T23:01:09. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -247,6 +247,7 @@
     <value type="bool" key="RunConfiguration.UseLibrarySearchPath">true</value>
     <value type="bool" key="RunConfiguration.UseQmlDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
+    <value type="QString" key="RunConfiguration.WorkingDirectory.default">C:/Users/pablo/Desktop/Ecole/Prog/Projet final/projet_final_1015/Projet_final/build-Chess101-Desktop_Qt_6_3_0_MinGW_64_bit-Debug</value>
    </valuemap>
    <value type="qlonglong" key="ProjectExplorer.Target.RunConfigurationCount">1</value>
   </valuemap>

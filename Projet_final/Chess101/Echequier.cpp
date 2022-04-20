@@ -33,10 +33,15 @@ void Echequier::creerEchequier(){
         for (int j = 0; j < 8; ++j){
              Case* caseEchequier = new Case(i, j, etatJeu_);
              cases_.push_back(caseEchequier);
-             if (compteur % 2 == 0)
-                caseEchequier->setCouleurBase("color : black ; background-color: white");
-             else
-                caseEchequier->setCouleurBase("color : white ; background-color: black");
+             if (compteur % 2 == 0) {
+                 caseEchequier->setCouleurBase("color : white ; background-color: black");
+                 caseEchequier->setNomCouleurBase("noir");
+             }
+             else {
+                 caseEchequier->setCouleurBase("color : black ; background-color: white");
+                 caseEchequier->setNomCouleurBase("blanc");
+             }
+
 
              caseEchequier->setStyleSheet(caseEchequier->getCouleurBase());
 

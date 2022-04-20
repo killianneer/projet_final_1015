@@ -34,30 +34,38 @@ vector<Case*> Piece::mouvementsPossibles(vector<Case*> cases) {
 
 bool Piece::critereMouvement(Case* caseEchequier) {
     return caseEchequier->getPosX() == 0;
-}
+};
+
+bool Piece::estCaseDePiece(Case* caseEchequier){
+    if (caseEchequier->getPosX() == posX_ && caseEchequier->getPosY() == posY_)
+        return true;
+    return false;
+};
 
 
 //Roi
 bool Roi::critereMouvement(Case* caseEchequier) {
-    if (caseEchequier->getPosX() == getPosX() && caseEchequier->getPosY() == getPosY())
+    if (estCaseDePiece(caseEchequier))
         return false;
 
+    //Toutes les cases autour de la piece
     return (caseEchequier->getPosX() >= getPosX() - 1
          && caseEchequier->getPosX() <= getPosX() + 1)
          &&
            (caseEchequier->getPosY() >= getPosY() - 1
          && caseEchequier->getPosY() <= getPosY() + 1);
-}
+};
 
 
 //Reine
 bool Reine::critereMouvement(Case* caseEchequier) {
-    if (caseEchequier->getPosX() == getPosX() && caseEchequier->getPosY() == getPosY())
+    if (estCaseDePiece(caseEchequier))
         return false;
 
-    return caseEchequier->getPosX() == getPosX()
-        || caseEchequier->getPosY() == getPosY(); // manque la diagonale
-}
+    return caseEchequier->getPosX() == getPosX() // Cases horizontales
+        || caseEchequier->getPosY() == getPosY() // Cases verticales
+        || (abs(caseEchequier->getPosX() - getPosX()) == abs(caseEchequier->getPosY() - getPosY())); // Cases diagonales
+};
 //Fou
 //Tour
 //Cheval

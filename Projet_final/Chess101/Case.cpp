@@ -30,7 +30,11 @@ Piece* Case::getPiece(){return piece_;};
 
 QString Case::getCouleurBase() {return couleurBase_;};
 
+string Case::getNomCouleurBase() {return nomCouleurBase_;};
+
 void Case::setCouleurBase(QString couleurBase) {couleurBase_ = couleurBase;};
+
+void Case::setNomCouleurBase(string nomCouleurBase) {nomCouleurBase_ = nomCouleurBase;};
 
 void Case::setEtatJeu(EtatJeu* etatJeu){etatJeu_ = etatJeu;};
 
