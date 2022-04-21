@@ -34,7 +34,7 @@ void Echequier::creerEchequier(){
              Case* caseEchequier = new Case(i, j, etatJeu_);
              cases_.push_back(caseEchequier);
              if (compteur % 2 == 0) {
-                 caseEchequier->setCouleurBase("background-color: rgba(165, 42, 42, 0.8)");
+                 caseEchequier->setCouleurBase("background-color: rgba(174, 102, 66, 1)");
                  caseEchequier->setNomCouleurBase("noir");
              }
              else {
