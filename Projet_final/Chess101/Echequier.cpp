@@ -36,7 +36,6 @@ void Echequier::piecesCreer(){
         pieces_.push_back(roiNoir2);
     }
     catch (int e) {
-        cout << e;
         QMessageBox messageErreur;
         messageErreur.critical(0,"Error","Un troisieme roi ne peux pas etre cree");
         messageErreur.setFixedSize(500,200);
