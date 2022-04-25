@@ -36,6 +36,7 @@ void Echequier::creerEchequier(){
              if (compteur % 2 == 0) {
                  caseEchequier->setCouleurBase("background-color: rgba(174, 102, 66, 1)");
                  caseEchequier->setNomCouleurBase("noir");
+                 //test
              }
              else {
                  caseEchequier->setCouleurBase("background-color: rgba(200, 50, 50, 0.1)");
