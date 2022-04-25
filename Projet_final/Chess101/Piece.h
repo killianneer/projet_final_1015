@@ -37,6 +37,7 @@ private:
 
 class Roi : public Piece{
 public :
+    static int compteurRoi;
     Roi() = default;
     Roi(bool couleur, int posX, int posY);
     bool critereMouvement(Case* caseEchequier);

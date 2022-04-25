@@ -1,13 +1,10 @@
 #include "Echequier.h"
 #include "EtatJeu.h"
+#include <QMessageBox>
 //Faire des pieces
 using namespace std;
 
 namespace valeursInitialesEchequier {
-    Roi* roiBlanc = new Roi(false, 0, 3);
-    Roi* roiNoir = new Roi(true, 7, 3);
-    Reine* reineNoir = new Reine(true, 7, 4);
-
     QString couleurCaseNoir = "background-color: rgba(174, 102, 66, 1)";
     QString couleurCaseBlanc = "background-color: rgba(200, 50, 50, 0.1)";
     string nomCaseNoir = "noir";
@@ -28,9 +25,24 @@ vector <Case*> Echequier::getCases(){return cases_;};
 QBoxLayout* Echequier::getBoite(){return boite_;};
 
 void Echequier::piecesCreer(){
-    using namespace valeursInitialesEchequier;
-    pieces_.push_back(roiBlanc);
-    pieces_.push_back(roiNoir);
+    try {
+        Roi* roiBlanc = new Roi(false, 0, 3);
+        pieces_.push_back(roiBlanc);
+
+        Roi* roiNoir = new Roi(true, 7, 3);
+        pieces_.push_back(roiNoir);
+
+        Roi* roiNoir2 = new Roi(true, 0, 0);
+        pieces_.push_back(roiNoir2);
+    }
+    catch (int e) {
+        cout << e;
+        QMessageBox messageErreur;
+        messageErreur.critical(0,"Error","Un troisieme roi ne peux pas etre cree");
+        messageErreur.setFixedSize(500,200);
+    }
+
+    Reine* reineNoir = new Reine(true, 7, 4);
     pieces_.push_back(reineNoir);
 };
 

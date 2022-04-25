@@ -47,7 +47,12 @@ bool Piece::estCaseDePiece(Case* caseEchequier){
 
 
 //Roi
+int Roi::compteurRoi = 0;
+
 Roi::Roi(bool couleur, int posX, int posY): Piece(couleur, posX, posY) {
+    if (compteurRoi == 2)
+        throw 1;
+
     if (couleur){
         this->setNomPiece("Roi Noir");
         this->setImagePath(":/pieces/pieces_png/roiNoir.png");
@@ -56,6 +61,8 @@ Roi::Roi(bool couleur, int posX, int posY): Piece(couleur, posX, posY) {
         this->setNomPiece("Roi Blanc");
         this->setImagePath(":/pieces/pieces_png/roiBlanc.png");
     }
+
+    compteurRoi++;
 };
 
 bool Roi::critereMouvement(Case* caseEchequier) {
