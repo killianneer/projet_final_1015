@@ -2,6 +2,14 @@
 
 using namespace std;
 
+namespace valeursInitialesEtatJeu {
+    QString couleurCaseAppuyeeFonce = "background-color: rgba(0, 30, 120, 0.7)";
+    QString couleurCaseAppuyeePale = "background-color: rgba(0, 30, 120, 0.5)";
+
+    QString couleurCaseADeplacerFonce = "background-color: rgba(0, 120, 30, 0.7)";
+    QString couleurCaseADeplacerpale = "background-color: rgba(0, 120, 30, 0.5)";
+}
+
 EtatJeu::EtatJeu(){
 };
 
@@ -12,11 +20,12 @@ void EtatJeu::setEchequier(Echequier* echequier){echequier_ = echequier;};
 void EtatJeu::setPieceAppuye(Piece* pieceAppuye){pieceAppuye_ = pieceAppuye;};
 
 void EtatJeu::caseClicker(Case* caseClicker){
+    using namespace valeursInitialesEtatJeu;
     if (caseClicker->getPiece() != nullptr && pieceAppuye_ == nullptr){
         if (caseClicker->getNomCouleurBase() == "noir")
-            caseClicker->setStyleSheet("background-color: rgba(0, 30, 120, 0.7)");
+            caseClicker->setStyleSheet(couleurCaseAppuyeeFonce);
         else
-            caseClicker->setStyleSheet("background-color: rgba(0, 30, 120, 0.5)");
+            caseClicker->setStyleSheet(couleurCaseAppuyeePale);
         caseAppuye_ = caseClicker;
         pieceAppuye_ = caseClicker->getPiece();
         casesPossibles_ = pieceAppuye_->mouvementsPossibles(echequier_->getCases());
@@ -37,10 +46,11 @@ void EtatJeu::caseClicker(Case* caseClicker){
 };
 
 void EtatJeu::casesVertes(vector<Case*> cases) {
+    using namespace valeursInitialesEtatJeu;
     for (Case* caseEchequier : cases) {
         if (caseEchequier->getNomCouleurBase() == "noir")
-            caseEchequier->setStyleSheet("background-color: rgba(0, 120, 30, 0.7)");
+            caseEchequier->setStyleSheet(couleurCaseADeplacerFonce);
         else
-            caseEchequier->setStyleSheet("background-color: rgba(0, 120, 30, 0.5)");
+            caseEchequier->setStyleSheet(couleurCaseADeplacerpale);
     }
 }

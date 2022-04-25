@@ -3,6 +3,10 @@
 
 using namespace std;
 
+namespace valeursInitialesCase {
+    int longueurCote = 100;
+}
+
 Case::Case(int posX, int posY, EtatJeu* etatJeu, QWidget* parent): QPushButton(parent){
     posX_ = posX;
     posY_ = posY;
@@ -11,12 +15,13 @@ Case::Case(int posX, int posY, EtatJeu* etatJeu, QWidget* parent): QPushButton(p
 };
 
 void Case::init(){
+    using namespace valeursInitialesCase;
     // faire attention au variable imaginaire
-    setMaximumHeight(100);
-    setMinimumHeight(100);
-    setMaximumWidth(100);
-    setMinimumWidth(100);
-    setIconSize(QSize(100, 100));
+    setMaximumHeight(longueurCote);
+    setMinimumHeight(longueurCote);
+    setMaximumWidth(longueurCote);
+    setMinimumWidth(longueurCote);
+    setIconSize(QSize(longueurCote, longueurCote));
     connect(this, SIGNAL(clicked()), this, SLOT(clickEvent()));
 }
 

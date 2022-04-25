@@ -3,6 +3,20 @@
 //Faire des pieces
 using namespace std;
 
+namespace valeursInitialesEchequier {
+    Roi* roiBlanc = new Roi(false, 0, 3);
+    Roi* roiNoir = new Roi(true, 7, 3);
+    Reine* reineNoir = new Reine(true, 7, 4);
+
+    QString couleurCaseNoir = "background-color: rgba(174, 102, 66, 1)";
+    QString couleurCaseBlanc = "background-color: rgba(200, 50, 50, 0.1)";
+    string nomCaseNoir = "noir";
+    string nomCaseBlanc = "blanc";
+
+    int maxBoxHeight = 800;
+    int maxBoxWidth = 800;
+}
+
 Echequier::Echequier(EtatJeu* etatJeu){
     etatJeu_ = etatJeu;
     etatJeu_->setEchequier(this);
@@ -14,16 +28,14 @@ vector <Case*> Echequier::getCases(){return cases_;};
 QBoxLayout* Echequier::getBoite(){return boite_;};
 
 void Echequier::piecesCreer(){
-    // A faire en unique_ptr()
-    Roi* roiBlanc = new Roi(false, 0, 3);
-    Roi* roiNoir = new Roi(true, 7, 3);
-    Reine* reineNoir = new Reine(true, 7, 4);
+    using namespace valeursInitialesEchequier;
     pieces_.push_back(roiBlanc);
     pieces_.push_back(roiNoir);
     pieces_.push_back(reineNoir);
 };
 
 void Echequier::creerEchequier(){
+    using namespace valeursInitialesEchequier;
     //faire les pieces
     piecesCreer();
 
@@ -34,13 +46,12 @@ void Echequier::creerEchequier(){
              Case* caseEchequier = new Case(i, j, etatJeu_);
              cases_.push_back(caseEchequier);
              if (compteur % 2 == 0) {
-                 caseEchequier->setCouleurBase("background-color: rgba(174, 102, 66, 1)");
-                 caseEchequier->setNomCouleurBase("noir");
-                 //test
+                 caseEchequier->setCouleurBase(couleurCaseNoir);
+                 caseEchequier->setNomCouleurBase(nomCaseNoir);
              }
              else {
-                 caseEchequier->setCouleurBase("background-color: rgba(200, 50, 50, 0.1)");
-                 caseEchequier->setNomCouleurBase("blanc");
+                 caseEchequier->setCouleurBase(couleurCaseBlanc);
+                 caseEchequier->setNomCouleurBase(nomCaseBlanc);
              }
 
 
@@ -61,8 +72,8 @@ void Echequier::creerEchequier(){
     // Caracteristiques du board
     QWidget *carre = new QWidget;
     carre->setLayout(this);
-    carre->setMaximumHeight(800);
-    carre->setMaximumWidth(800);
+    carre->setMaximumHeight(maxBoxHeight);
+    carre->setMaximumWidth(maxBoxWidth);
     QBoxLayout* boite = new QBoxLayout((QBoxLayout::LeftToRight));
     boite_ = boite;
     boite_->addWidget(carre);
