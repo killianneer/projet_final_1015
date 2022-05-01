@@ -18,9 +18,15 @@ void Echequier::piecesCreer(){
     Roi* roiBlanc = new Roi(false, 0, 3);
     Roi* roiNoir = new Roi(true, 7, 3);
     Reine* reineNoir = new Reine(true, 7, 4);
+    Fou* fouBlanc = new Fou(false, 0, 2);
+    Tour* tourNoir = new Tour(true, 3, 7);
+    Cheval* chevalBlanc = new Cheval(false, 3, 4);
     pieces_.push_back(roiBlanc);
     pieces_.push_back(roiNoir);
     pieces_.push_back(reineNoir);
+    pieces_.push_back(fouBlanc);
+    pieces_.push_back(tourNoir);
+    pieces_.push_back(chevalBlanc);
 };
 
 void Echequier::creerEchequier(){

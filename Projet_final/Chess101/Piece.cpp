@@ -49,12 +49,12 @@ bool Piece::estCaseDePiece(Case* caseEchequier){
 //Roi
 Roi::Roi(bool couleur, int posX, int posY): Piece(couleur, posX, posY) {
     if (couleur){
-        this->setNomPiece("Roi Noir");
-        this->setImagePath(":/pieces/pieces_png/roiNoir.png");
+        nom_ = "Roi Noir";
+        imagePath_ = ":/pieces/pieces_png/roiNoir.png";
     }
     else{
-        this->setNomPiece("Roi Blanc");
-        this->setImagePath(":/pieces/pieces_png/roiBlanc.png");
+        nom_ = "Roi Blanc";
+        imagePath_ = ":/pieces/pieces_png/roiBlanc.png";
     }
 };
 
@@ -63,23 +63,23 @@ bool Roi::critereMouvement(Case* caseEchequier) {
         return false;
 
     //Toutes les cases autour de la piece
-    return (caseEchequier->getPosX() >= getPosX() - 1
-         && caseEchequier->getPosX() <= getPosX() + 1)
+    return (caseEchequier->getPosX() >= posX_ - 1
+         && caseEchequier->getPosX() <= posX_ + 1)
          &&
-           (caseEchequier->getPosY() >= getPosY() - 1
-         && caseEchequier->getPosY() <= getPosY() + 1);
+           (caseEchequier->getPosY() >= posY_ - 1
+         && caseEchequier->getPosY() <= posY_ + 1);
 };
 
 
 //Reine
 Reine::Reine(bool couleur, int posX, int posY): Piece(couleur, posX, posY) {
     if (couleur){
-        this->setNomPiece("Reine Noir");
-        this->setImagePath(":/pieces/pieces_png/reineNoir.png");
+        nom_ = "Reine Noir";
+        imagePath_ = ":/pieces/pieces_png/reineNoir.png";
     }
     else{
-        this->setNomPiece("Reine Blanc");
-        this->setImagePath(":/pieces/pieces_png/reineBlanc.png");
+        nom_ = "Reine Blanc";
+        imagePath_ = ":/pieces/pieces_png/reineBlanc.png";
     }
 };
 
@@ -87,11 +87,86 @@ bool Reine::critereMouvement(Case* caseEchequier) {
     if (estCaseDePiece(caseEchequier))
         return false;
 
-    return caseEchequier->getPosX() == getPosX() // Cases horizontales
-        || caseEchequier->getPosY() == getPosY() // Cases verticales
-        || (abs(caseEchequier->getPosX() - getPosX()) == abs(caseEchequier->getPosY() - getPosY())); // Cases diagonales
+    return caseEchequier->getPosX() == posX_ // Cases horizontales
+        || caseEchequier->getPosY() == posY_ // Cases verticales
+        || (abs(caseEchequier->getPosX() - posX_) == abs(caseEchequier->getPosY() - posY_)); // Cases diagonales
 };
+
 //Fou
+Fou::Fou(bool couleur, int posX, int posY): Piece(couleur, posX, posY) {
+    if (couleur){
+        nom_ = "Fou Noir";
+        imagePath_ = ":/pieces/pieces_png/fouNoir.png";
+    }
+    else{
+        nom_ = "Fou Blanc";
+        imagePath_ = ":/pieces/pieces_png/fouBlanc.png";
+    }
+};
+
+bool Fou::critereMouvement(Case* caseEchequier) {
+    if (estCaseDePiece(caseEchequier))
+        return false;
+
+    return (abs(caseEchequier->getPosX() - posX_) == abs(caseEchequier->getPosY() - posY_)); // Cases diagonales
+};
+
 //Tour
+Tour::Tour(bool couleur, int posX, int posY): Piece(couleur, posX, posY) {
+    if (couleur){
+        nom_ = "Tour Noir";
+        imagePath_ = ":/pieces/pieces_png/tourNoir.png";
+    }
+    else{
+        nom_ = "Tour Blanc";
+        imagePath_ = ":/pieces/pieces_png/tourBlanc.png";
+    }
+};
+
+bool Tour::critereMouvement(Case* caseEchequier) {
+    if (estCaseDePiece(caseEchequier))
+        return false;
+
+    return caseEchequier->getPosX() == posX_ // Cases horizontales
+        || caseEchequier->getPosY() == posY_; // Cases verticales
+};
+
 //Cheval
+Cheval::Cheval(bool couleur, int posX, int posY): Piece(couleur, posX, posY) {
+    if (couleur){
+        nom_ = "Cheval Noir";
+        imagePath_ = ":/pieces/pieces_png/chevalNoir.png";
+    }
+    else{
+        nom_ = "Cheval Blanc";
+        imagePath_ = ":/pieces/pieces_png/chevalBlanc.png";
+    }
+};
+
+bool Cheval::critereMouvement(Case* caseEchequier) {
+    if (estCaseDePiece(caseEchequier))
+        return false;
+
+    return (abs(caseEchequier->getPosX() - posX_) == 2 || abs(caseEchequier->getPosX() - posY_) == 2)
+            &&
+           (abs(caseEchequier->getPosX() - posX_) == 1 || abs(caseEchequier->getPosX() - posY_) == 1);
+};
+
 //Pion
+Pion::Pion(bool couleur, int posX, int posY): Piece(couleur, posX, posY) {
+    if (couleur){
+        nom_ = "Pion Noir";
+        imagePath_ = ":/pieces/pieces_png/pionNoir.png";
+    }
+    else{
+        nom_ = "Pion Blanc";
+        imagePath_ = ":/pieces/pieces_png/pionBlanc.png";
+    }
+};
+
+bool Pion::critereMouvement(Case* caseEchequier) {
+    if (estCaseDePiece(caseEchequier))
+        return false;
+
+    return true;
+};

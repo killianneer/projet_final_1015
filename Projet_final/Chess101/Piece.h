@@ -28,7 +28,7 @@ public :
     QString getImagePath();
     void setImagePath(QString imagePath);
 
-private:
+protected:
     QString nom_ ;
     bool couleur_;
     int posX_, posY_;
@@ -54,28 +54,32 @@ private :
 class Tour : public Piece{
 public :
     Tour() = default;
-    Tour(bool couleur, int posX, int posY): Piece(couleur, posX, posY) {this->setNomPiece("Tour");};
+    Tour(bool couleur, int posX, int posY);
+    bool critereMouvement(Case* caseEchequier);
 private :
 };
 
 class Fou : public Piece{
 public :
     Fou() = default;
-    Fou(bool couleur, int posX, int posY): Piece(couleur, posX, posY) {this->setNomPiece("Fou");};
+    Fou(bool couleur, int posX, int posY);
+    bool critereMouvement(Case* caseEchequier);
 private :
 };
 
 class Cheval : public Piece{
 public :
     Cheval() = default;
-    Cheval(bool couleur, int posX, int posY): Piece(couleur, posX, posY) {this->setNomPiece("Cheval");};
+    Cheval(bool couleur, int posX, int posY);
+    bool critereMouvement(Case* caseEchequier);
 private :
 };
 
 class Pion : public Piece{
 public :
     Pion() = default;
-    Pion(bool couleur, int posX, int posY): Piece(couleur, posX, posY) {this->setNomPiece("Pion");};
+    Pion(bool couleur, int posX, int posY);
+    bool critereMouvement(Case* caseEchequier);
 private :
 };
 #endif // PIECE_H
