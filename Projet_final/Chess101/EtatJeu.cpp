@@ -48,13 +48,59 @@ void EtatJeu::casesVertes(vector<Case*>& cases) {
 
 void EtatJeu::filtrerObstruction(std::vector<Case*>& cases){
     //int direction = pieceAppuye_->getDirectionX(caseEchequier);
+    bool premierePiece = false;
+    //X-endessous
     for (int i = pieceAppuye_->getPosX(); i < 8; i++){
-        vector<Case>::iterator it = find_if(cases.begin(), cases.end(), [&] (Case& c) {return c.getPosX() == i && c.getPosY() == pieceAppuye_->getPosY();});
-        if (*it != nullptr){
-            if((&it)->getPiece() != nullptr){
+        vector<Case*>::iterator it = find_if(cases.begin(), cases.end(), [&] (Case* c) {return c->getPosX() == i && c->getPosY() == pieceAppuye_->getPosY();});
+        if (it != cases.end()){
+            if (premierePiece){
                 cases.erase(it);
             }
+            else if((*it)->getPiece() != nullptr){
+                premierePiece = true;
+            }
         }
+    }
 
+    premierePiece = false;
+    //X-enHaut
+    for (int i = pieceAppuye_->getPosX(); i > -1; i--){
+        vector<Case*>::iterator it = find_if(cases.begin(), cases.end(), [&] (Case* c) {return c->getPosX() == i && c->getPosY() == pieceAppuye_->getPosY();});
+        if (it != cases.end()){
+            if (premierePiece){
+                cases.erase(it);
+            }
+            else if((*it)->getPiece() != nullptr){
+                premierePiece = true;
+            }
+        }
+    }
+
+    premierePiece = false;
+    //Y-aGauche
+    for (int i = pieceAppuye_->getPosY(); i > -1; i--){
+        vector<Case*>::iterator it = find_if(cases.begin(), cases.end(), [&] (Case* c) {return c->getPosY() == i && c->getPosX() == pieceAppuye_->getPosX();});
+        if (it != cases.end()){
+            if (premierePiece){
+                cases.erase(it);
+            }
+            else if((*it)->getPiece() != nullptr){
+                premierePiece = true;
+            }
+        }
+    }
+
+    premierePiece = false;
+    //Y-aGauche
+    for (int i = pieceAppuye_->getPosY(); i < 8; i++){
+        vector<Case*>::iterator it = find_if(cases.begin(), cases.end(), [&] (Case* c) {return c->getPosY() == i && c->getPosX() == pieceAppuye_->getPosX();});
+        if (it != cases.end()){
+            if (premierePiece){
+                cases.erase(it);
+            }
+            else if((*it)->getPiece() != nullptr){
+                premierePiece = true;
+            }
+        }
     }
 };
