@@ -13,7 +13,8 @@ public :
     void setPieceAppuye(Piece* pieceAppuye);
 
     void caseClicker(Case* caseClicker);
-    void casesVertes(std::vector<Case*> cases);
+    void casesVertes(std::vector<Case*>& cases);
+    void filtrerObstruction(std::vector<Case*>& cases);
     //void deplacerPiece();
 
 

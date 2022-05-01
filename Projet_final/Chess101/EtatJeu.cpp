@@ -20,6 +20,7 @@ void EtatJeu::caseClicker(Case* caseClicker){
         caseAppuye_ = caseClicker;
         pieceAppuye_ = caseClicker->getPiece();
         casesPossibles_ = pieceAppuye_->mouvementsPossibles(echequier_->getCases());
+        filtrerObstruction(casesPossibles_);
         casesVertes(casesPossibles_);
     }
     else if (pieceAppuye_ != nullptr){
@@ -36,11 +37,24 @@ void EtatJeu::caseClicker(Case* caseClicker){
     }
 };
 
-void EtatJeu::casesVertes(vector<Case*> cases) {
+void EtatJeu::casesVertes(vector<Case*>& cases) {
     for (Case* caseEchequier : cases) {
         if (caseEchequier->getNomCouleurBase() == "noir")
             caseEchequier->setStyleSheet("background-color: rgba(0, 120, 30, 0.7)");
         else
             caseEchequier->setStyleSheet("background-color: rgba(0, 120, 30, 0.5)");
     }
-}
+};
+
+void EtatJeu::filtrerObstruction(std::vector<Case*>& cases){
+    //int direction = pieceAppuye_->getDirectionX(caseEchequier);
+    for (int i = pieceAppuye_->getPosX(); i < 8; i++){
+        vector<Case>::iterator it = find_if(cases.begin(), cases.end(), [&] (Case& c) {return c.getPosX() == i && c.getPosY() == pieceAppuye_->getPosY();});
+        if (*it != nullptr){
+            if((&it)->getPiece() != nullptr){
+                cases.erase(it);
+            }
+        }
+
+    }
+};

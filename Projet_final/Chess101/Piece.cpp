@@ -45,6 +45,28 @@ bool Piece::estCaseDePiece(Case* caseEchequier){
     return false;
 };
 
+int Piece::getDirectionX(Case* caseComparer){
+    int direction = 0;
+    if(caseComparer->getPosX() - posX_ < 0){
+        direction = 1;
+    }
+
+    if(caseComparer->getPosX() - posX_ > 0){
+        direction = -1;
+    }
+    return direction;
+};
+int Piece::getDirectionY(Case* caseComparer){
+    int direction = 0;
+    if(caseComparer->getPosY() - posY_ < 0){
+        direction = 1;
+    }
+
+    if(caseComparer->getPosY() - posY_ > 0){
+        direction = -1;
+    }
+    return direction;
+};
 
 //Roi
 Roi::Roi(bool couleur, int posX, int posY): Piece(couleur, posX, posY) {
@@ -87,8 +109,8 @@ bool Reine::critereMouvement(Case* caseEchequier) {
     if (estCaseDePiece(caseEchequier))
         return false;
 
-    return caseEchequier->getPosX() == posX_ // Cases horizontales
-        || caseEchequier->getPosY() == posY_ // Cases verticales
+    return caseEchequier->getPosX() == posX_
+        || caseEchequier->getPosY() == posY_
         || (abs(caseEchequier->getPosX() - posX_) == abs(caseEchequier->getPosY() - posY_)); // Cases diagonales
 };
 
@@ -127,8 +149,8 @@ bool Tour::critereMouvement(Case* caseEchequier) {
     if (estCaseDePiece(caseEchequier))
         return false;
 
-    return caseEchequier->getPosX() == posX_ // Cases horizontales
-        || caseEchequier->getPosY() == posY_; // Cases verticales
+    return caseEchequier->getPosX() == posX_
+        || caseEchequier->getPosY() == posY_;
 };
 
 //Cheval

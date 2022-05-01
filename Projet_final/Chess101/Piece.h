@@ -28,6 +28,9 @@ public :
     QString getImagePath();
     void setImagePath(QString imagePath);
 
+    int getDirectionX(Case* caseComparer);
+    int getDirectionY(Case* caseComparer);
+
 protected:
     QString nom_ ;
     bool couleur_;
