@@ -147,9 +147,9 @@ bool Cheval::critereMouvement(Case* caseEchequier) {
     if (estCaseDePiece(caseEchequier))
         return false;
 
-    return (abs(caseEchequier->getPosX() - posX_) == 2 || abs(caseEchequier->getPosX() - posY_) == 2)
+    return (abs(posX_ - caseEchequier->getPosX()) == 2 || abs(posY_ - caseEchequier->getPosY()) == 2)
             &&
-           (abs(caseEchequier->getPosX() - posX_) == 1 || abs(caseEchequier->getPosX() - posY_) == 1);
+           (abs(posX_ - caseEchequier->getPosX()) == 1 || abs(posY_ - caseEchequier->getPosY()) == 1);
 };
 
 //Pion
@@ -168,5 +168,17 @@ bool Pion::critereMouvement(Case* caseEchequier) {
     if (estCaseDePiece(caseEchequier))
         return false;
 
-    return true;
+    if(couleur_) {
+        return (caseEchequier->getPosX() - posX_ == 1 && posY_ == caseEchequier->getPosY())
+                ||
+               (caseEchequier->getPosX() - posX_ == 2 && posY_ == caseEchequier->getPosY() && posX_ == 1);
+
+    }
+
+    else {
+        return (posX_ - caseEchequier->getPosX() == 1 && posY_ == caseEchequier->getPosY())
+                ||
+               (posX_ - caseEchequier->getPosX() == 2 && posY_ == caseEchequier->getPosY() && posX_ == 6);;
+    }
+
 };
