@@ -12,6 +12,7 @@ Echequier(EtatJeu* etatJeu);
 std::vector <Piece*> getPieces();
 std::vector <Case*> getCases();
 QBoxLayout* getBoite();
+void changerCouleurCase(Case* caseEchequier, QString couleurFonce, QString couleurPale);
 
 void piecesCreer();
 void creerEchequier();

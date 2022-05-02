@@ -11,7 +11,7 @@ class Piece{
 public :
     Piece() = default;
     Piece(bool couleur, int posX, int posY);
-    ~Piece() = default;
+    virtual ~Piece() = default;
 
     QString getNomPiece();
     void setNomPiece(QString nom);

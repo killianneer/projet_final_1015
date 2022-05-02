@@ -9,6 +9,7 @@ Echequier::Echequier(EtatJeu* etatJeu){
 };
 
 vector <Piece*> Echequier::getPieces(){return pieces_;};
+
 vector <Case*> Echequier::getCases(){return cases_;};
 
 QBoxLayout* Echequier::getBoite(){return boite_;};
@@ -75,4 +76,11 @@ void Echequier::creerEchequier(){
     QBoxLayout* boite = new QBoxLayout((QBoxLayout::LeftToRight));
     boite_ = boite;
     boite_->addWidget(carre);
+};
+
+void Echequier::changerCouleurCase(Case* caseEchequier, QString couleurFonce, QString couleurPale) {
+    if (caseEchequier->getNomCouleurBase() == "noir")
+        caseEchequier->setStyleSheet(couleurFonce);
+    else
+        caseEchequier->setStyleSheet(couleurPale);
 };

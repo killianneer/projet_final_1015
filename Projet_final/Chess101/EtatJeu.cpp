@@ -2,6 +2,17 @@
 
 using namespace std;
 
+namespace couleurs {
+QString bleuFonce = "background-color: rgba(0, 30, 120, 0.7)";
+QString bleuPale = "background-color: rgba(0, 30, 120, 0.5)";
+
+QString vertFonce = "background-color: rgba(0, 120, 30, 0.7)";
+QString vertPale = "background-color: rgba(0, 120, 30, 0.5)";
+
+QString rougeFonce = "background-color: rgba(200, 30, 60, 0.7)";
+QString rougePale = "background-color: rgba(200, 30, 60, 0.5)";
+}
+
 EtatJeu::EtatJeu(){
 };
 
@@ -12,17 +23,18 @@ void EtatJeu::setEchequier(Echequier* echequier){echequier_ = echequier;};
 void EtatJeu::setPieceAppuye(Piece* pieceAppuye){pieceAppuye_ = pieceAppuye;};
 
 void EtatJeu::caseClicker(Case* caseClicker){
+    using namespace couleurs;
     if (caseClicker->getPiece() != nullptr && pieceAppuye_ == nullptr){
-        if (caseClicker->getNomCouleurBase() == "noir")
-            caseClicker->setStyleSheet("background-color: rgba(0, 30, 120, 0.7)");
-        else
-            caseClicker->setStyleSheet("background-color: rgba(0, 30, 120, 0.5)");
+        echequier_->changerCouleurCase(caseClicker, bleuFonce, bleuPale);
+
         caseAppuye_ = caseClicker;
         pieceAppuye_ = caseClicker->getPiece();
+
         casesPossibles_ = pieceAppuye_->mouvementsPossibles(echequier_->getCases());
         filtrerObstruction(casesPossibles_);
         filtrerEquipe(casesPossibles_);
-        casesVertes(casesPossibles_);
+
+        couleurCasesPossibles(casesPossibles_);
     }
     else if (pieceAppuye_ != nullptr){
         for (Case* caseEchequier : casesPossibles_) {
@@ -38,21 +50,13 @@ void EtatJeu::caseClicker(Case* caseClicker){
     }
 };
 
-void EtatJeu::casesVertes(vector<Case*>& cases) {
+void EtatJeu::couleurCasesPossibles(vector<Case*>& cases) {
+    using namespace couleurs;
     for (Case* caseEchequier : cases) {
-        if (caseEchequier->getPiece() != nullptr){
-            if (caseEchequier->getNomCouleurBase() == "noir")
-                caseEchequier->setStyleSheet("background-color: rgba(150, 120, 30, 0.7)");
-            else
-                caseEchequier->setStyleSheet("background-color: rgba(150, 120, 30, 0.5)");
-        }
-        else{
-            if (caseEchequier->getNomCouleurBase() == "noir")
-                caseEchequier->setStyleSheet("background-color: rgba(0, 120, 30, 0.7)");
-            else
-                caseEchequier->setStyleSheet("background-color: rgba(0, 120, 30, 0.5)");
-        }
-
+        if (caseEchequier->getPiece() != nullptr)
+            echequier_->changerCouleurCase(caseEchequier, rougeFonce, rougePale);
+        else
+            echequier_->changerCouleurCase(caseEchequier, vertFonce, vertPale);
     }
 };
 
