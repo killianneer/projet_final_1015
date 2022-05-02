@@ -32,7 +32,10 @@ void EtatJeu::caseClicker(Case* caseClicker){
 
         casesPossibles_ = pieceAppuye_->mouvementsPossibles(echequier_->getCases());
         filtrerObstruction(casesPossibles_);
-        filtrerEquipe(casesPossibles_);
+        if(pieceAppuye_->estPion())
+            filtrerPion(casesPossibles_);
+        else
+            filtrerEquipe(casesPossibles_);
 
         couleurCasesPossibles(casesPossibles_);
     }
@@ -67,6 +70,9 @@ void EtatJeu::enleverCaseObstacle(vector<Case*>::iterator it, std::vector<Case*>
         }
         else if((*it)->getPiece() != nullptr){
             premierePiece = true;
+
+            if (pieceAppuye_->estPion() && (*it)->getPiece()->getCouleur() == pieceAppuye_->getCouleur())
+                cases.erase(it);
         }
     }
 };
@@ -144,9 +150,17 @@ void EtatJeu::filtrerObstruction(std::vector<Case*>& cases){
 };
 
 void EtatJeu::filtrerEquipe(std::vector<Case*>& cases){
-    cases.erase(remove_if(cases.begin(), cases.end(), [=](Case* c) {
+    cases.erase(remove_if(cases.begin(), cases.end(), [&](Case* c) {
         if (c->getPiece() == nullptr)
             return false;
         return c->getPiece()->getCouleur() == pieceAppuye_->getCouleur();
+    }), cases.end());
+};
+
+void EtatJeu::filtrerPion(std::vector<Case*>& cases) {
+    cases.erase(remove_if(cases.begin(), cases.end(), [&](Case* c) {
+        return (c->getPiece() == nullptr && c->getPosY() != pieceAppuye_->getPosY())
+                ||
+               (c->getPiece() != nullptr && c->getPosY() == pieceAppuye_->getPosY());
     }), cases.end());
 };

@@ -17,6 +17,7 @@ public :
     void filtrerObstruction(std::vector<Case*>& cases);
     void enleverCaseObstacle(std::vector<Case*>::iterator it, std::vector<Case*>& cases, bool& premierePiece);
     void filtrerEquipe(std::vector<Case*>& cases);
+    void filtrerPion(std::vector<Case*>& cases);
 
 private :
     Echequier* echequier_ = nullptr;

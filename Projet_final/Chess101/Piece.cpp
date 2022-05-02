@@ -42,28 +42,7 @@ bool Piece::estCaseDePiece(Case* caseEchequier){
     return false;
 };
 
-int Piece::getDirectionX(Case* caseComparer){
-    int direction = 0;
-    if(caseComparer->getPosX() - posX_ < 0){
-        direction = 1;
-    }
-
-    if(caseComparer->getPosX() - posX_ > 0){
-        direction = -1;
-    }
-    return direction;
-};
-int Piece::getDirectionY(Case* caseComparer){
-    int direction = 0;
-    if(caseComparer->getPosY() - posY_ < 0){
-        direction = 1;
-    }
-
-    if(caseComparer->getPosY() - posY_ > 0){
-        direction = -1;
-    }
-    return direction;
-};
+bool Piece::estPion() { return false; };
 
 //Roi
 Roi::Roi(bool couleur, int posX, int posY): Piece(couleur, posX, posY) {
@@ -188,16 +167,18 @@ bool Pion::critereMouvement(Case* caseEchequier) {
         return false;
 
     if(couleur_) {
-        return (caseEchequier->getPosX() - posX_ == 1 && posY_ == caseEchequier->getPosY())
+        return (caseEchequier->getPosX() - posX_ == 1 && (posY_ == caseEchequier->getPosY() || abs(caseEchequier->getPosY() - posY_) == 1))
                 ||
                (caseEchequier->getPosX() - posX_ == 2 && posY_ == caseEchequier->getPosY() && posX_ == 1);
 
     }
 
     else {
-        return (posX_ - caseEchequier->getPosX() == 1 && posY_ == caseEchequier->getPosY())
+        return (posX_ - caseEchequier->getPosX() == 1 && (posY_ == caseEchequier->getPosY() || abs(caseEchequier->getPosY() - posY_) == 1))
                 ||
                (posX_ - caseEchequier->getPosX() == 2 && posY_ == caseEchequier->getPosY() && posX_ == 6);;
     }
 
 };
+
+bool Pion::estPion() { return true; };

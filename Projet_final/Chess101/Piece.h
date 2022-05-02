@@ -28,9 +28,7 @@ public :
 
     QString getImagePath();
     void setImagePath(QString imagePath);
-
-    int getDirectionX(Case* caseComparer);
-    int getDirectionY(Case* caseComparer);
+    virtual bool estPion();
 
 protected:
     QString nom_ ;
@@ -84,6 +82,7 @@ public :
     Pion() = default;
     Pion(bool couleur, int posX, int posY);
     bool critereMouvement(Case* caseEchequier);
+    bool estPion();
 private :
 };
 #endif // PIECE_H
