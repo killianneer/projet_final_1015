@@ -16,6 +16,7 @@ void Piece::setNomPiece(QString nom) {nom_ = nom;};
 
 int Piece::getPosX(){return posX_;};
 int Piece::getPosY(){return posY_;};
+bool Piece::getCouleur(){return couleur_;};
 
 QString Piece::getImagePath(){return imagePath_;};
 void Piece::setImagePath(QString imagePath){imagePath_ = imagePath;};

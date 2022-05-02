@@ -15,8 +15,8 @@ public :
     void caseClicker(Case* caseClicker);
     void casesVertes(std::vector<Case*>& cases);
     void filtrerObstruction(std::vector<Case*>& cases);
-    //void deplacerPiece();
-
+    void enleverCaseObstacle(std::vector<Case*>::iterator it, std::vector<Case*>& cases, bool& premierePiece);
+    void filtrerEquipe(std::vector<Case*>& cases);
 
 private :
     Echequier* echequier_;

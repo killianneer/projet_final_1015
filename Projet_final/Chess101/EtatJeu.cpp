@@ -21,6 +21,7 @@ void EtatJeu::caseClicker(Case* caseClicker){
         pieceAppuye_ = caseClicker->getPiece();
         casesPossibles_ = pieceAppuye_->mouvementsPossibles(echequier_->getCases());
         filtrerObstruction(casesPossibles_);
+        filtrerEquipe(casesPossibles_);
         casesVertes(casesPossibles_);
     }
     else if (pieceAppuye_ != nullptr){
@@ -39,88 +40,61 @@ void EtatJeu::caseClicker(Case* caseClicker){
 
 void EtatJeu::casesVertes(vector<Case*>& cases) {
     for (Case* caseEchequier : cases) {
-        if (caseEchequier->getNomCouleurBase() == "noir")
-            caseEchequier->setStyleSheet("background-color: rgba(0, 120, 30, 0.7)");
-        else
-            caseEchequier->setStyleSheet("background-color: rgba(0, 120, 30, 0.5)");
+        if (caseEchequier->getPiece() != nullptr){
+            if (caseEchequier->getNomCouleurBase() == "noir")
+                caseEchequier->setStyleSheet("background-color: rgba(150, 120, 30, 0.7)");
+            else
+                caseEchequier->setStyleSheet("background-color: rgba(150, 120, 30, 0.5)");
+        }
+        else{
+            if (caseEchequier->getNomCouleurBase() == "noir")
+                caseEchequier->setStyleSheet("background-color: rgba(0, 120, 30, 0.7)");
+            else
+                caseEchequier->setStyleSheet("background-color: rgba(0, 120, 30, 0.5)");
+        }
+
+    }
+};
+
+void EtatJeu::enleverCaseObstacle(vector<Case*>::iterator it, std::vector<Case*>& cases, bool& premierePiece){
+    if (it != cases.end()){
+        if (premierePiece){
+            cases.erase(it);
+        }
+        else if((*it)->getPiece() != nullptr){
+            premierePiece = true;
+        }
     }
 };
 
 void EtatJeu::filtrerObstruction(std::vector<Case*>& cases){
-    //int direction = pieceAppuye_->getDirectionX(caseEchequier);
 
-    for (int i = 0; i < 5; i++) {
-        bool premierePiece = false;
-        for (int j = pieceAppuye_->getPosX(); j < 8; j++){
-            vector<Case*>::iterator it = find_if(cases.begin(), cases.end(), [&] (Case* c) {return c->getPosX() == j && c->getPosY() == pieceAppuye_->getPosY();});
-            if (it != cases.end()){
-                if (premierePiece){
-                    cases.erase(it);
-                }
-                else if((*it)->getPiece() != nullptr){
-                    premierePiece = true;
-                }
-            }
-        }
-    }
-
-
-
-    /*
     bool premierePiece = false;
     //X-enBas
     for (int i = pieceAppuye_->getPosX(); i < 8; i++){
         vector<Case*>::iterator it = find_if(cases.begin(), cases.end(), [&] (Case* c) {return c->getPosX() == i && c->getPosY() == pieceAppuye_->getPosY();});
-        if (it != cases.end()){
-            if (premierePiece){
-                cases.erase(it);
-            }
-            else if((*it)->getPiece() != nullptr){
-                premierePiece = true;
-            }
-        }
+        enleverCaseObstacle(it, cases, premierePiece);
     }
 
     premierePiece = false;
     //X-enHaut
     for (int i = pieceAppuye_->getPosX(); i > -1; i--){
         vector<Case*>::iterator it = find_if(cases.begin(), cases.end(), [&] (Case* c) {return c->getPosX() == i && c->getPosY() == pieceAppuye_->getPosY();});
-        if (it != cases.end()){
-            if (premierePiece){
-                cases.erase(it);
-            }
-            else if((*it)->getPiece() != nullptr){
-                premierePiece = true;
-            }
-        }
+        enleverCaseObstacle(it, cases, premierePiece);
     }
 
     premierePiece = false;
     //Y-aGauche
     for (int i = pieceAppuye_->getPosY(); i > -1; i--){
         vector<Case*>::iterator it = find_if(cases.begin(), cases.end(), [&] (Case* c) {return c->getPosY() == i && c->getPosX() == pieceAppuye_->getPosX();});
-        if (it != cases.end()){
-            if (premierePiece){
-                cases.erase(it);
-            }
-            else if((*it)->getPiece() != nullptr){
-                premierePiece = true;
-            }
-        }
+        enleverCaseObstacle(it, cases, premierePiece);
     }
 
     premierePiece = false;
-    //Y-aGauche
+    //Y-aDroite
     for (int i = pieceAppuye_->getPosY(); i < 8; i++){
         vector<Case*>::iterator it = find_if(cases.begin(), cases.end(), [&] (Case* c) {return c->getPosY() == i && c->getPosX() == pieceAppuye_->getPosX();});
-        if (it != cases.end()){
-            if (premierePiece){
-                cases.erase(it);
-            }
-            else if((*it)->getPiece() != nullptr){
-                premierePiece = true;
-            }
-        }
+        enleverCaseObstacle(it, cases, premierePiece);
     }
 
 
@@ -132,14 +106,7 @@ void EtatJeu::filtrerObstruction(std::vector<Case*>& cases){
     int cptY = 0;
     for (int i = pieceAppuye_->getPosX(); i < 8; i++){
         vector<Case*>::iterator it = find_if(cases.begin(), cases.end(), [&] (Case* c) {return c->getPosX() == i && c->getPosY() == pieceAppuye_->getPosY() - cptY;});
-        if (it != cases.end()){
-            if (premierePiece){
-                cases.erase(it);
-            }
-            else if((*it)->getPiece() != nullptr){
-                premierePiece = true;
-            }
-        }
+        enleverCaseObstacle(it, cases, premierePiece);
         cptY++;
     }
 
@@ -148,14 +115,7 @@ void EtatJeu::filtrerObstruction(std::vector<Case*>& cases){
     cptY = 0;
     for (int i = pieceAppuye_->getPosX(); i < 8; i++){
         vector<Case*>::iterator it = find_if(cases.begin(), cases.end(), [&] (Case* c) {return c->getPosX() == i && c->getPosY() == pieceAppuye_->getPosY() + cptY;});
-        if (it != cases.end()){
-            if (premierePiece){
-                cases.erase(it);
-            }
-            else if((*it)->getPiece() != nullptr){
-                premierePiece = true;
-            }
-        }
+        enleverCaseObstacle(it, cases, premierePiece);
         cptY++;
     }
 
@@ -164,14 +124,7 @@ void EtatJeu::filtrerObstruction(std::vector<Case*>& cases){
     cptY = 0;
     for (int i = pieceAppuye_->getPosX(); i > -1; i--){
         vector<Case*>::iterator it = find_if(cases.begin(), cases.end(), [&] (Case* c) {return c->getPosX() == i && c->getPosY() == pieceAppuye_->getPosY() - cptY;});
-        if (it != cases.end()){
-            if (premierePiece){
-                cases.erase(it);
-            }
-            else if((*it)->getPiece() != nullptr){
-                premierePiece = true;
-            }
-        }
+        enleverCaseObstacle(it, cases, premierePiece);
         cptY++;
     }
 
@@ -180,15 +133,16 @@ void EtatJeu::filtrerObstruction(std::vector<Case*>& cases){
     cptY = 0;
     for (int i = pieceAppuye_->getPosX(); i > -1; i--){
         vector<Case*>::iterator it = find_if(cases.begin(), cases.end(), [&] (Case* c) {return c->getPosX() == i && c->getPosY() == pieceAppuye_->getPosY() + cptY;});
-        if (it != cases.end()){
-            if (premierePiece){
-                cases.erase(it);
-            }
-            else if((*it)->getPiece() != nullptr){
-                premierePiece = true;
-            }
-        }
+        enleverCaseObstacle(it, cases, premierePiece);
         cptY++;
     }
-    */
+
+};
+
+void EtatJeu::filtrerEquipe(std::vector<Case*>& cases){
+    cases.erase(remove_if(cases.begin(), cases.end(), [=](Case* c) {
+        if (c->getPiece() == nullptr)
+            return false;
+        return c->getPiece()->getCouleur() == pieceAppuye_->getCouleur();
+    }), cases.end());
 };

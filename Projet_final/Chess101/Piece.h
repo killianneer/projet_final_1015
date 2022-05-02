@@ -24,6 +24,7 @@ public :
 
     int getPosX();
     int getPosY();
+    bool getCouleur();
 
     QString getImagePath();
     void setImagePath(QString imagePath);
