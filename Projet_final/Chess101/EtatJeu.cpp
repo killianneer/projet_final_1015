@@ -48,8 +48,27 @@ void EtatJeu::casesVertes(vector<Case*>& cases) {
 
 void EtatJeu::filtrerObstruction(std::vector<Case*>& cases){
     //int direction = pieceAppuye_->getDirectionX(caseEchequier);
+
+    for (int i = 0; i < 5; i++) {
+        bool premierePiece = false;
+        for (int j = pieceAppuye_->getPosX(); j < 8; j++){
+            vector<Case*>::iterator it = find_if(cases.begin(), cases.end(), [&] (Case* c) {return c->getPosX() == j && c->getPosY() == pieceAppuye_->getPosY();});
+            if (it != cases.end()){
+                if (premierePiece){
+                    cases.erase(it);
+                }
+                else if((*it)->getPiece() != nullptr){
+                    premierePiece = true;
+                }
+            }
+        }
+    }
+
+
+
+    /*
     bool premierePiece = false;
-    //X-endessous
+    //X-enBas
     for (int i = pieceAppuye_->getPosX(); i < 8; i++){
         vector<Case*>::iterator it = find_if(cases.begin(), cases.end(), [&] (Case* c) {return c->getPosX() == i && c->getPosY() == pieceAppuye_->getPosY();});
         if (it != cases.end()){
@@ -103,4 +122,73 @@ void EtatJeu::filtrerObstruction(std::vector<Case*>& cases){
             }
         }
     }
+
+
+    //*********************** diagonales
+
+
+    premierePiece = false;
+    //aGaucheBas
+    int cptY = 0;
+    for (int i = pieceAppuye_->getPosX(); i < 8; i++){
+        vector<Case*>::iterator it = find_if(cases.begin(), cases.end(), [&] (Case* c) {return c->getPosX() == i && c->getPosY() == pieceAppuye_->getPosY() - cptY;});
+        if (it != cases.end()){
+            if (premierePiece){
+                cases.erase(it);
+            }
+            else if((*it)->getPiece() != nullptr){
+                premierePiece = true;
+            }
+        }
+        cptY++;
+    }
+
+    premierePiece = false;
+    //aDroiteBas
+    cptY = 0;
+    for (int i = pieceAppuye_->getPosX(); i < 8; i++){
+        vector<Case*>::iterator it = find_if(cases.begin(), cases.end(), [&] (Case* c) {return c->getPosX() == i && c->getPosY() == pieceAppuye_->getPosY() + cptY;});
+        if (it != cases.end()){
+            if (premierePiece){
+                cases.erase(it);
+            }
+            else if((*it)->getPiece() != nullptr){
+                premierePiece = true;
+            }
+        }
+        cptY++;
+    }
+
+    premierePiece = false;
+    //aGaucheHaut
+    cptY = 0;
+    for (int i = pieceAppuye_->getPosX(); i > -1; i--){
+        vector<Case*>::iterator it = find_if(cases.begin(), cases.end(), [&] (Case* c) {return c->getPosX() == i && c->getPosY() == pieceAppuye_->getPosY() - cptY;});
+        if (it != cases.end()){
+            if (premierePiece){
+                cases.erase(it);
+            }
+            else if((*it)->getPiece() != nullptr){
+                premierePiece = true;
+            }
+        }
+        cptY++;
+    }
+
+    premierePiece = false;
+    //aDroiteHaut
+    cptY = 0;
+    for (int i = pieceAppuye_->getPosX(); i > -1; i--){
+        vector<Case*>::iterator it = find_if(cases.begin(), cases.end(), [&] (Case* c) {return c->getPosX() == i && c->getPosY() == pieceAppuye_->getPosY() + cptY;});
+        if (it != cases.end()){
+            if (premierePiece){
+                cases.erase(it);
+            }
+            else if((*it)->getPiece() != nullptr){
+                premierePiece = true;
+            }
+        }
+        cptY++;
+    }
+    */
 };
