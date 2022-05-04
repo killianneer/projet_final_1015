@@ -5,7 +5,7 @@
 
 class EtatJeu{
 public :
-    EtatJeu();
+    EtatJeu(bool tourEquipe, bool roiEnEchec);
     ~EtatJeu() = default;
 
     void setEchequier(Echequier* echequier);
@@ -18,11 +18,14 @@ public :
     void enleverCaseObstacle(std::vector<Case*>::iterator it, std::vector<Case*>& cases, bool& premierePiece);
     void filtrerEquipe(std::vector<Case*>& cases);
     void filtrerPion(std::vector<Case*>& cases);
+    void verifierEchec();
 
 private :
     Echequier* echequier_ = nullptr;
     Case* caseAppuye_ = nullptr;
     Piece* pieceAppuye_ = nullptr;
     std::vector<Case*> casesPossibles_;
+    bool tourEquipe_ = false;
+    bool roiEnEchec_ = false;
 };
 #endif // ETATJEU_H

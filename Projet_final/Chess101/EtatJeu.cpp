@@ -13,8 +13,7 @@ QString rougeFonce = "background-color: rgba(200, 30, 60, 0.7)";
 QString rougePale = "background-color: rgba(200, 30, 60, 0.5)";
 }
 
-EtatJeu::EtatJeu(){
-};
+EtatJeu::EtatJeu(bool tourEquipe, bool roiEnEchec) : tourEquipe_(tourEquipe), roiEnEchec_(roiEnEchec){};
 
 void EtatJeu::setCaseAppuye(Case* caseAppuye){caseAppuye_ = caseAppuye;};
 
@@ -25,19 +24,21 @@ void EtatJeu::setPieceAppuye(Piece* pieceAppuye){pieceAppuye_ = pieceAppuye;};
 void EtatJeu::caseClicker(Case* caseClicker){
     using namespace couleurs;
     if (caseClicker->getPiece() != nullptr && pieceAppuye_ == nullptr){
-        echequier_->changerCouleurCase(caseClicker, bleuFonce, bleuPale);
+        if(caseClicker->getPiece()->getCouleur() == tourEquipe_){
+            echequier_->changerCouleurCase(caseClicker, bleuFonce, bleuPale);
 
-        caseAppuye_ = caseClicker;
-        pieceAppuye_ = caseClicker->getPiece();
+            caseAppuye_ = caseClicker;
+            pieceAppuye_ = caseClicker->getPiece();
 
-        casesPossibles_ = pieceAppuye_->mouvementsPossibles(echequier_->getCases());
-        filtrerObstruction(casesPossibles_);
-        if(pieceAppuye_->estPion())
-            filtrerPion(casesPossibles_);
-        else
-            filtrerEquipe(casesPossibles_);
+            casesPossibles_ = pieceAppuye_->mouvementsPossibles(echequier_->getCases());
+            filtrerObstruction(casesPossibles_);
+            if(pieceAppuye_->estPion())
+                filtrerPion(casesPossibles_);
+            else
+                filtrerEquipe(casesPossibles_);
 
-        couleurCasesPossibles(casesPossibles_);
+            couleurCasesPossibles(casesPossibles_);
+        }
     }
     else if (pieceAppuye_ != nullptr){
         for (Case* caseEchequier : casesPossibles_) {
@@ -45,6 +46,7 @@ void EtatJeu::caseClicker(Case* caseClicker){
             if (caseClicker == caseEchequier) {
                 caseAppuye_->enleverPiece();
                 pieceAppuye_->deplacerPiece(caseClicker);
+                tourEquipe_ = !tourEquipe_;
             }
         }
         caseAppuye_->setStyleSheet(caseAppuye_->getCouleurBase());
