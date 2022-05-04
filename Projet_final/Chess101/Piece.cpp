@@ -42,6 +42,7 @@ bool Piece::estCaseDePiece(Case* caseEchequier){
     return false;
 };
 
+bool Piece::estRoi() { return false; };
 bool Piece::estPion() { return false; };
 
 //Roi
@@ -67,6 +68,8 @@ bool Roi::critereMouvement(Case* caseEchequier) {
            (caseEchequier->getPosY() >= posY_ - 1
          && caseEchequier->getPosY() <= posY_ + 1);
 };
+
+bool Roi::estRoi() { return true; };
 
 
 //Reine

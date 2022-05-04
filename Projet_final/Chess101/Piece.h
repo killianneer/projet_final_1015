@@ -28,6 +28,7 @@ public :
 
     QString getImagePath();
     void setImagePath(QString imagePath);
+    virtual bool estRoi();
     virtual bool estPion();
 
 protected:
@@ -42,6 +43,7 @@ public :
     Roi() = default;
     Roi(bool couleur, int posX, int posY);
     bool critereMouvement(Case* caseEchequier);
+    bool estRoi();
 private :
 };
 

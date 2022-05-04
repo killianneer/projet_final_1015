@@ -11,6 +11,9 @@ QString vertPale = "background-color: rgba(0, 120, 30, 0.5)";
 
 QString rougeFonce = "background-color: rgba(200, 30, 60, 0.7)";
 QString rougePale = "background-color: rgba(200, 30, 60, 0.5)";
+
+QString violetFonce = "background-color: rgba(200, 0, 255, 0.7)";
+QString violetPale = "background-color: rgba(200, 0, 255, 0.5)";
 }
 
 EtatJeu::EtatJeu(bool tourEquipe, bool roiEnEchec) : tourEquipe_(tourEquipe), roiEnEchec_(roiEnEchec){};
@@ -25,8 +28,6 @@ void EtatJeu::caseClicker(Case* caseClicker){
     using namespace couleurs;
     if (caseClicker->getPiece() != nullptr && pieceAppuye_ == nullptr){
         if(caseClicker->getPiece()->getCouleur() == tourEquipe_){
-            echequier_->changerCouleurCase(caseClicker, bleuFonce, bleuPale);
-
             caseAppuye_ = caseClicker;
             pieceAppuye_ = caseClicker->getPiece();
 
@@ -37,6 +38,8 @@ void EtatJeu::caseClicker(Case* caseClicker){
             else
                 filtrerEquipe(casesPossibles_);
 
+
+            echequier_->changerCouleurCase(caseClicker, bleuFonce, bleuPale);
             couleurCasesPossibles(casesPossibles_);
         }
     }
@@ -46,6 +49,7 @@ void EtatJeu::caseClicker(Case* caseClicker){
             if (caseClicker == caseEchequier) {
                 caseAppuye_->enleverPiece();
                 pieceAppuye_->deplacerPiece(caseClicker);
+                roiEnEchec_ = verifierEchec(tourEquipe_);
                 tourEquipe_ = !tourEquipe_;
             }
         }
@@ -62,6 +66,14 @@ void EtatJeu::couleurCasesPossibles(vector<Case*>& cases) {
             echequier_->changerCouleurCase(caseEchequier, rougeFonce, rougePale);
         else
             echequier_->changerCouleurCase(caseEchequier, vertFonce, vertPale);
+    }
+};
+
+void EtatJeu::setCasesPiecesEnemies(std::vector<Case*>& cases){
+    for (Case* caseEchequier : cases) {
+        if (caseEchequier->getPiece() != nullptr)
+            if (caseEchequier->getPiece()->getCouleur() != pieceAppuye_->getCouleur())
+                casesPiecesEnemiesTemp_.push_back(caseEchequier);
     }
 };
 
@@ -166,3 +178,39 @@ void EtatJeu::filtrerPion(std::vector<Case*>& cases) {
                (c->getPiece() != nullptr && c->getPosY() == pieceAppuye_->getPosY());
     }), cases.end());
 };
+
+bool EtatJeu::verifierEchec(bool couleur){
+    using namespace couleurs;
+    casesPiecesEnemiesTemp_ = {};
+
+    for(Piece* piece : echequier_->getPieces()) {
+        if (piece->getCouleur() == couleur) {
+            pieceAppuye_ = piece;
+            casesPossiblesTemp_ = pieceAppuye_->mouvementsPossibles(echequier_->getCases());
+            filtrerObstruction(casesPossiblesTemp_);
+            if(pieceAppuye_->estPion())
+                filtrerPion(casesPossiblesTemp_);
+            else
+                filtrerEquipe(casesPossiblesTemp_);
+
+            setCasesPiecesEnemies(casesPossiblesTemp_);
+
+            for (Case* caseEnemie : casesPiecesEnemiesTemp_)
+                if (caseEnemie->getPiece()->estRoi()) {
+                    echequier_->changerCouleurCase(caseEnemie, violetFonce, violetPale);
+                    return true;
+                }
+        }
+    }
+
+    return false;
+};
+/*
+void EtatJeu::filtrerEchecs(std::vector<Case*>& cases) {
+    cases.erase(remove_if(cases.begin(), cases.end(), [&](Case* c) {
+        if (c->getPiece() == nullptr)
+            return false;
+        return c->getPiece()->getCouleur() == pieceAppuye_->getCouleur();
+    }), cases.end());
+};
+*/
