@@ -22,6 +22,7 @@ public :
     std::string getNomCouleurBase();
     Piece* getPiece();
     QString getCouleurBase();
+    void setPiece(Piece* piece);
     void setCouleurBase(QString couleurBase);
     void setNomCouleurBase(std::string nomCouleurBase);
     void setEtatJeu(EtatJeu* etatJeu);

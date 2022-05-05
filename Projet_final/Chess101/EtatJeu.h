@@ -14,12 +14,12 @@ public :
 
     void caseClicker(Case* caseClicker);
     void couleurCasesPossibles(std::vector<Case*>& cases);
-    void filtrerObstruction(std::vector<Case*>& cases);
-    void enleverCaseObstacle(std::vector<Case*>::iterator it, std::vector<Case*>& cases, bool& premierePiece);
-    void filtrerEquipe(std::vector<Case*>& cases);
-    void filtrerPion(std::vector<Case*>& cases);
-    //void filtrerEchecs(std::vector<Case*>& cases);
-    void setCasesPiecesEnemies(std::vector<Case*>& cases);
+    void filtrerObstruction(std::vector<Case*>& cases, Piece* pieceVerifier);
+    void enleverCaseObstacle(std::vector<Case*>::iterator it, std::vector<Case*>& cases, bool& premierePiece, Piece* pieceVerifier);
+    void filtrerEquipe(std::vector<Case*>& cases, Piece* pieceVerifier);
+    void filtrerPion(std::vector<Case*>& cases, Piece* pieceVerifier);
+    void filtrerEchecs(std::vector<Case*>& cases, Piece* pieceVerifier);
+    void setCasesPiecesEnemies(std::vector<Case*>& cases, Piece* pieceVerifier);
     bool verifierEchec(bool couleur);
 
 private :

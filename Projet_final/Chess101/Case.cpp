@@ -36,6 +36,8 @@ void Case::setNomCouleurBase(string nomCouleurBase) {nomCouleurBase_ = nomCouleu
 
 void Case::setEtatJeu(EtatJeu* etatJeu){etatJeu_ = etatJeu;};
 
+void Case::setPiece(Piece* piece) { piece_ = piece; };
+
 void Case::clickEvent() {etatJeu_->caseClicker(this);};
 
 void Case::ajouterPiece(Piece* piece){

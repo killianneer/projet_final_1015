@@ -23,6 +23,14 @@ void Piece::deplacerPiece(Case* caseADeplacer){
     caseADeplacer->ajouterPiece(this);
 };
 
+Piece* Piece::deplacerPieceSimulation(Case* caseADeplacer){
+    Piece* pieceMemoire = caseADeplacer->getPiece();
+    posX_ = caseADeplacer->getPosX();
+    posY_ = caseADeplacer->getPosY();
+    caseADeplacer->setPiece(this);
+    return pieceMemoire;
+};
+
 vector<Case*> Piece::mouvementsPossibles(vector<Case*> cases) {
     vector<Case*> casesPossibles;
     for(Case* caseEchequier : cases) {

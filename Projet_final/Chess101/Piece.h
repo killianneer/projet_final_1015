@@ -16,8 +16,8 @@ public :
     QString getNomPiece();
     void setNomPiece(QString nom);
 
-    void deplacerPiece(Case* caseADeplacer); // A implementer
-    void capturerPiece(); // A implementer
+    void deplacerPiece(Case* caseADeplacer);
+    Piece* deplacerPieceSimulation(Case* caseADeplacer);
     std::vector<Case*> mouvementsPossibles(std::vector<Case*> cases);
     virtual bool critereMouvement(Case* caseEchequier);
     bool estCaseDePiece(Case* caseEchequier);
