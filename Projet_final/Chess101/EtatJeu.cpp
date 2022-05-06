@@ -208,6 +208,7 @@ bool EtatJeu::verifierEchec(bool couleur){
 void EtatJeu::filtrerEchecs(std::vector<Case*>& cases, Piece* pieceVerifier) {
     cases.erase(remove_if(cases.begin(), cases.end(), [&](Case* c) {
         Piece* pieceMemoire = pieceVerifier->deplacerPieceSimulation(c);
+        caseAppuye_->setPiece(nullptr);
         bool verif = verifierEchec(!pieceAppuye_->getCouleur());
 
         pieceVerifier->deplacerPieceSimulation(caseAppuye_);
