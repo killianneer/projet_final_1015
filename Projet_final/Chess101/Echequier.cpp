@@ -23,7 +23,8 @@ void Echequier::piecesCreer(){
     Tour* tourNoir = new Tour(true, 3, 7);
     Cheval* chevalBlanc = new Cheval(false, 3, 4);
     Pion* pionNoir = new Pion(true, 1, 1);
-    Pion* pionBlanc = new Pion(false, 6, 1);
+    Pion* pionBlanc0 = new Pion(false, 6, 0);
+    Pion* pionBlanc1 = new Pion(false, 6, 1);
     pieces_.push_back(roiBlanc);
     pieces_.push_back(roiNoir);
     pieces_.push_back(reineNoir);
@@ -31,7 +32,8 @@ void Echequier::piecesCreer(){
     pieces_.push_back(tourNoir);
     pieces_.push_back(chevalBlanc);
     pieces_.push_back(pionNoir);
-    pieces_.push_back(pionBlanc);
+    pieces_.push_back(pionBlanc0);
+    pieces_.push_back(pionBlanc1);
 };
 
 void Echequier::creerEchequier(){

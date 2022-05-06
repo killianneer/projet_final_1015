@@ -1,4 +1,11 @@
 #include "EtatJeu.h"
+#include "QMessageBox"
+
+/*
+QMessageBox messageErreur;
+messageErreur.critical(0,"Titre","Texte");
+messageErreur.setFixedSize(500,200);
+*/
 
 using namespace std;
 
@@ -37,7 +44,7 @@ void EtatJeu::caseClicker(Case* caseClicker){
                 filtrerPion(casesPossibles_, pieceAppuye_);
             else
                 filtrerEquipe(casesPossibles_, pieceAppuye_);
-            filtrerEchecs(casesPossibles_, pieceAppuye_);
+            filtrerEchecs(casesPossibles_, pieceAppuye_, caseAppuye_);
 
             echequier_->changerCouleurCase(caseClicker, bleuFonce, bleuPale);
             couleurCasesPossibles(casesPossibles_);
@@ -53,6 +60,20 @@ void EtatJeu::caseClicker(Case* caseClicker){
                 tourEquipe_ = !tourEquipe_;
             }
         }
+        if (roiEnEchec_)
+            if (verifierMat(tourEquipe_)) {
+                if(tourEquipe_) {
+                    QMessageBox messageErreur;
+                    messageErreur.critical(0,"Partie Finie!","Les blancs ont gagné");
+                    messageErreur.setFixedSize(500,200);
+                }
+                else {
+                    QMessageBox messageErreur;
+                    messageErreur.critical(0,"Partie Finie!","Les noirs ont gagné");
+                    messageErreur.setFixedSize(500,200);
+                }
+            }
+        roiEnEchec_ = false;
         caseAppuye_->setStyleSheet(caseAppuye_->getCouleurBase());
         caseAppuye_ = nullptr;
         pieceAppuye_ = nullptr;
@@ -180,7 +201,6 @@ void EtatJeu::filtrerPion(std::vector<Case*>& cases, Piece* pieceVerifier) {
 };
 
 bool EtatJeu::verifierEchec(bool couleur){
-    using namespace couleurs;
     casesPiecesEnemiesTemp_ = {};
 
     for(Case* caseEchequier : echequier_->getCases()) {
@@ -205,13 +225,13 @@ bool EtatJeu::verifierEchec(bool couleur){
     return false;
 };
 
-void EtatJeu::filtrerEchecs(std::vector<Case*>& cases, Piece* pieceVerifier) {
+void EtatJeu::filtrerEchecs(std::vector<Case*>& cases, Piece* pieceVerifier, Case* caseDepart) {
     cases.erase(remove_if(cases.begin(), cases.end(), [&](Case* c) {
         Piece* pieceMemoire = pieceVerifier->deplacerPieceSimulation(c);
-        caseAppuye_->setPiece(nullptr);
-        bool verif = verifierEchec(!pieceAppuye_->getCouleur());
+        caseDepart->setPiece(nullptr);
+        bool verif = verifierEchec(!pieceVerifier->getCouleur());
 
-        pieceVerifier->deplacerPieceSimulation(caseAppuye_);
+        pieceVerifier->deplacerPieceSimulation(caseDepart);
         if(pieceMemoire == nullptr)
             c->setPiece(nullptr);
         else
@@ -219,5 +239,27 @@ void EtatJeu::filtrerEchecs(std::vector<Case*>& cases, Piece* pieceVerifier) {
 
         return verif;
     }), cases.end());
+};
+
+bool EtatJeu::verifierMat(bool couleur){
+    vector<Case*> casesAVerif = {};
+
+    for(Case* caseEchequier : echequier_->getCases()) {
+        Piece* piece = caseEchequier->getPiece();
+        if (piece != nullptr)
+            if (piece->getCouleur() == couleur) {
+                casesAVerif = piece->mouvementsPossibles(echequier_->getCases());
+                filtrerObstruction(casesAVerif, piece);
+                if(piece->estPion())
+                    filtrerPion(casesAVerif, piece);
+                else
+                    filtrerEquipe(casesAVerif, piece);
+                filtrerEchecs(casesAVerif, piece, caseEchequier);
+
+                if(!casesAVerif.empty())
+                    return false;
+            }
+    }
+    return true;
 };
 

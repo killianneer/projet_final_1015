@@ -18,9 +18,10 @@ public :
     void enleverCaseObstacle(std::vector<Case*>::iterator it, std::vector<Case*>& cases, bool& premierePiece, Piece* pieceVerifier);
     void filtrerEquipe(std::vector<Case*>& cases, Piece* pieceVerifier);
     void filtrerPion(std::vector<Case*>& cases, Piece* pieceVerifier);
-    void filtrerEchecs(std::vector<Case*>& cases, Piece* pieceVerifier);
+    void filtrerEchecs(std::vector<Case*>& cases, Piece* pieceVerifier, Case* caseDepart);
     void setCasesPiecesEnemies(std::vector<Case*>& cases, Piece* pieceVerifier);
     bool verifierEchec(bool couleur);
+    bool verifierMat(bool couleur);
 
 private :
     Echequier* echequier_ = nullptr;
