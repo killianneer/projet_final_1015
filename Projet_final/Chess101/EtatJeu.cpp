@@ -1,26 +1,16 @@
 #include "EtatJeu.h"
-#include "QMessageBox"
-
-/*
-QMessageBox messageErreur;
-messageErreur.critical(0,"Titre","Texte");
-messageErreur.setFixedSize(500,200);
-*/
 
 using namespace std;
 
 namespace couleurs {
-QString bleuFonce = "background-color: rgba(0, 30, 120, 0.7)";
-QString bleuPale = "background-color: rgba(0, 30, 120, 0.5)";
+const QString bleuFonce = "background-color: rgba(0, 30, 120, 0.7)";
+const QString bleuPale = "background-color: rgba(0, 30, 120, 0.5)";
 
-QString vertFonce = "background-color: rgba(0, 120, 30, 0.7)";
-QString vertPale = "background-color: rgba(0, 120, 30, 0.5)";
+const QString vertFonce = "background-color: rgba(0, 120, 30, 0.7)";
+const QString vertPale = "background-color: rgba(0, 120, 30, 0.5)";
 
-QString rougeFonce = "background-color: rgba(200, 30, 60, 0.7)";
-QString rougePale = "background-color: rgba(200, 30, 60, 0.5)";
-
-QString violetFonce = "background-color: rgba(200, 0, 255, 0.7)";
-QString violetPale = "background-color: rgba(200, 0, 255, 0.5)";
+const QString rougeFonce = "background-color: rgba(200, 30, 60, 0.7)";
+const QString rougePale = "background-color: rgba(200, 30, 60, 0.5)";
 }
 
 EtatJeu::EtatJeu(bool tourEquipe, bool roiEnEchec) : tourEquipe_(tourEquipe), roiEnEchec_(roiEnEchec){};
@@ -38,12 +28,7 @@ void EtatJeu::caseClicker(Case* caseClicker){
             caseAppuye_ = caseClicker;
             pieceAppuye_ = caseClicker->getPiece();
 
-            casesPossibles_ = pieceAppuye_->mouvementsPossibles(echequier_->getCases());
-            filtrerObstruction(casesPossibles_, pieceAppuye_);
-            if(pieceAppuye_->estPion())
-                filtrerPion(casesPossibles_, pieceAppuye_);
-            else
-                filtrerEquipe(casesPossibles_, pieceAppuye_);
+            filtresBase(casesPossibles_, pieceAppuye_);
             filtrerEchecs(casesPossibles_, pieceAppuye_, caseAppuye_);
 
             echequier_->changerCouleurCase(caseClicker, bleuFonce, bleuPale);
@@ -62,16 +47,10 @@ void EtatJeu::caseClicker(Case* caseClicker){
         }
         if (roiEnEchec_)
             if (verifierMat(tourEquipe_)) {
-                if(tourEquipe_) {
-                    QMessageBox messageErreur;
-                    messageErreur.critical(0,"Partie Finie!","Les blancs ont gagné");
-                    messageErreur.setFixedSize(500,200);
-                }
-                else {
-                    QMessageBox messageErreur;
-                    messageErreur.critical(0,"Partie Finie!","Les noirs ont gagné");
-                    messageErreur.setFixedSize(500,200);
-                }
+                if(tourEquipe_)
+                    echequier_->messageBox("Partie Finie!","Les blancs ont gagné");
+                else
+                    echequier_->messageBox("Partie Finie!","Les noirs ont gagné");
             }
         roiEnEchec_ = false;
         caseAppuye_->setStyleSheet(caseAppuye_->getCouleurBase());
@@ -110,6 +89,15 @@ void EtatJeu::enleverCaseObstacle(vector<Case*>::iterator it, std::vector<Case*>
                 cases.erase(it);
         }
     }
+};
+
+void EtatJeu::filtresBase(std::vector<Case*>& cases, Piece* pieceVerifier) {
+    cases = pieceVerifier->mouvementsPossibles(echequier_->getCases());
+    filtrerObstruction(cases, pieceVerifier);
+    if(pieceVerifier->estPion())
+        filtrerPion(cases, pieceVerifier);
+    else
+        filtrerEquipe(cases, pieceVerifier);
 };
 
 void EtatJeu::filtrerObstruction(std::vector<Case*>& cases, Piece* pieceVerifier){
@@ -207,13 +195,7 @@ bool EtatJeu::verifierEchec(bool couleur){
         Piece* piece = caseEchequier->getPiece();
         if (piece != nullptr)
             if (piece->getCouleur() == couleur) {
-                casesPossiblesTemp_ = piece->mouvementsPossibles(echequier_->getCases());
-                filtrerObstruction(casesPossiblesTemp_, piece);
-                if(piece->estPion())
-                    filtrerPion(casesPossiblesTemp_, piece);
-                else
-                    filtrerEquipe(casesPossiblesTemp_, piece);
-
+                filtresBase(casesPossiblesTemp_, piece);
                 setCasesPiecesEnemies(casesPossiblesTemp_, piece);
 
                 for (Case* caseEnemie : casesPiecesEnemiesTemp_)
@@ -221,7 +203,6 @@ bool EtatJeu::verifierEchec(bool couleur){
                         return true;
             }
     }
-
     return false;
 };
 
@@ -248,12 +229,7 @@ bool EtatJeu::verifierMat(bool couleur){
         Piece* piece = caseEchequier->getPiece();
         if (piece != nullptr)
             if (piece->getCouleur() == couleur) {
-                casesAVerif = piece->mouvementsPossibles(echequier_->getCases());
-                filtrerObstruction(casesAVerif, piece);
-                if(piece->estPion())
-                    filtrerPion(casesAVerif, piece);
-                else
-                    filtrerEquipe(casesAVerif, piece);
+                filtresBase(casesAVerif, piece);
                 filtrerEchecs(casesAVerif, piece, caseEchequier);
 
                 if(!casesAVerif.empty())
@@ -261,5 +237,17 @@ bool EtatJeu::verifierMat(bool couleur){
             }
     }
     return true;
+};
+
+void EtatJeu::reset() {
+    if (caseAppuye_ != nullptr)
+        caseAppuye_->setStyleSheet(caseAppuye_->getCouleurBase());
+    caseAppuye_ = nullptr;
+    pieceAppuye_ = nullptr;
+    for (Case* caseEchequier : casesPossibles_) {
+        caseEchequier->setStyleSheet(caseEchequier->getCouleurBase());
+    }
+    tourEquipe_ = false;
+    roiEnEchec_ = false;
 };
 

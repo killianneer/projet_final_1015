@@ -13,7 +13,7 @@ public :
     Piece(bool couleur, int posX, int posY);
     virtual ~Piece() = default;
 
-    QString getNomPiece();
+    QString getNomPiece() const;
     void setNomPiece(QString nom);
 
     void deplacerPiece(Case* caseADeplacer);
@@ -22,11 +22,12 @@ public :
     virtual bool critereMouvement(Case* caseEchequier);
     bool estCaseDePiece(Case* caseEchequier);
 
-    int getPosX();
-    int getPosY();
-    bool getCouleur();
+    int getPosX() const;
+    int getPosY() const;
+    bool getCouleur() const;
 
-    QString getImagePath();
+    QString getImagePath() const;
+    //Source des images des pieces: Les icones trouves a wikipedia
     void setImagePath(QString imagePath);
     virtual bool estRoi();
     virtual bool estPion();

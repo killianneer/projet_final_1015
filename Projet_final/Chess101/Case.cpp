@@ -3,32 +3,29 @@
 
 using namespace std;
 
-Case::Case(int posX, int posY, EtatJeu* etatJeu, QWidget* parent): QPushButton(parent){
+Case::Case(int posX, int posY, int taille, EtatJeu* etatJeu, QWidget* parent): QPushButton(parent){
     posX_ = posX;
     posY_ = posY;
+    taille_ = taille;
     etatJeu_ = etatJeu;
     init();
 };
 
 void Case::init(){
-    // faire attention au variable imaginaire
-    setMaximumHeight(100);
-    setMinimumHeight(100);
-    setMaximumWidth(100);
-    setMinimumWidth(100);
-    setIconSize(QSize(100, 100));
+    setFixedSize(QSize(taille_, taille_));
+    setIconSize(QSize(taille_, taille_));
     connect(this, SIGNAL(clicked()), this, SLOT(clickEvent()));
 }
 
-int Case::getPosX(){return posX_;};
+int Case::getPosX() const {return posX_;};
 
-int Case::getPosY(){return posY_;};
+int Case::getPosY() const {return posY_;};
 
-Piece* Case::getPiece(){return piece_;};
+Piece* Case::getPiece() const {return piece_;};
 
-QString Case::getCouleurBase() {return couleurBase_;};
+QString Case::getCouleurBase() const {return couleurBase_;};
 
-string Case::getNomCouleurBase() {return nomCouleurBase_;};
+string Case::getNomCouleurBase() const {return nomCouleurBase_;};
 
 void Case::setCouleurBase(QString couleurBase) {couleurBase_ = couleurBase;};
 

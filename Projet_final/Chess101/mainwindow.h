@@ -20,8 +20,19 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    QWidget* getWindow() const;
+    void init();
+    std::vector<Piece*> jeuDeBase();
+    std::vector<Piece*> test1();
+    std::vector<Piece*> test2();
+
+public slots:
+    void nouveauJeuBase();
+    void jeuTest1();
+    void jeuTest2();
 
 private:
-    Ui::MainWindow *ui;
+    Echequier* echequier_;
+    QWidget* window_;
 };
 #endif // MAINWINDOW_H

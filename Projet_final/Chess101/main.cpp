@@ -1,27 +1,12 @@
 #include "mainwindow.h"
 
-using namespace std;
-
+//Source des images des pieces: Les icones trouves a wikipedia
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-    // Va dans classe Echequier --> pas clean
-    EtatJeu* etatJeu = new EtatJeu(false, false);
-    Echequier echequier = Echequier(etatJeu);
-    echequier.creerEchequier();
-
-    // Create a widget
-    QWidget *window = new QWidget();
-
-    // Set the grid layout as a main layout
-    window->setLayout(echequier.getBoite());
-
-    // Window title
-    window->setWindowTitle("Grid Layouts (8x8)");
-
-    // Display
-    window->show();
+    MainWindow* mainWindow = new MainWindow();
+    mainWindow->getWindow()->show();
 
     return a.exec();
 }

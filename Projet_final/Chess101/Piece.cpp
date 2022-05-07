@@ -7,14 +7,14 @@ using namespace std;
 //Piece General
 Piece::Piece(bool couleur, int posX, int posY): couleur_(couleur), posX_(posX), posY_(posY) {};
 
-QString Piece::getNomPiece(){return nom_;};
+QString Piece::getNomPiece() const {return nom_;};
 void Piece::setNomPiece(QString nom) {nom_ = nom;};
 
-int Piece::getPosX(){return posX_;};
-int Piece::getPosY(){return posY_;};
-bool Piece::getCouleur(){return couleur_;};
+int Piece::getPosX() const {return posX_;};
+int Piece::getPosY() const {return posY_;};
+bool Piece::getCouleur() const {return couleur_;};
 
-QString Piece::getImagePath(){return imagePath_;};
+QString Piece::getImagePath() const {return imagePath_;};
 void Piece::setImagePath(QString imagePath){imagePath_ = imagePath;};
 
 void Piece::deplacerPiece(Case* caseADeplacer){

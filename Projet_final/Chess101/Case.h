@@ -10,18 +10,18 @@ class EtatJeu;
 class Case : public QPushButton{
     Q_OBJECT
 public :
-    Case(int posX, int posY, EtatJeu* etatJeu, QWidget* parent = nullptr);
+    Case(int posX, int posY, int taille, EtatJeu* etatJeu, QWidget* parent = nullptr);
     ~Case() = default;
     void init();
 
     void ajouterPiece(Piece* piece);
     void enleverPiece();
 
-    int getPosX();
-    int getPosY();
-    std::string getNomCouleurBase();
-    Piece* getPiece();
-    QString getCouleurBase();
+    int getPosX() const;
+    int getPosY() const;
+    std::string getNomCouleurBase() const;
+    Piece* getPiece() const;
+    QString getCouleurBase() const;
     void setPiece(Piece* piece);
     void setCouleurBase(QString couleurBase);
     void setNomCouleurBase(std::string nomCouleurBase);
@@ -31,7 +31,7 @@ public slots:
     void clickEvent();
 
 private :
-    int posX_, posY_;
+    int posX_, posY_, taille_;
     Piece* piece_ = nullptr;
     QString couleurBase_ ;
     std::string nomCouleurBase_;

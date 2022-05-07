@@ -9,13 +9,16 @@ class Echequier : public QGridLayout{
 public :
 Echequier(EtatJeu* etatJeu);
 
-std::vector <Piece*> getPieces();
-std::vector <Case*> getCases();
-QBoxLayout* getBoite();
+std::vector <Piece*> getPieces() const;
+std::vector <Case*> getCases() const;
+QBoxLayout* getBoite() const;
 void changerCouleurCase(Case* caseEchequier, QString couleurFonce, QString couleurPale);
+void messageBox(QString titre, QString texte);
 
-void piecesCreer();
-void creerEchequier();
+void piecesCreer(std::vector <Piece*> pieces);
+void creerEchequier(std::vector <Piece*> pieces);
+void recreerEchequier(std::vector <Piece*> pieces);
+void creerUi();
 
 private :
 std::vector <Piece*> pieces_;
